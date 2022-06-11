@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from '../assets/Logo.jpg';
 import '../css/Home.css';
 import { useHistory } from 'react-router-dom';
-
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 // import { useSelector, useDispatch } from "react-redux";
@@ -32,7 +31,7 @@ const Header = () => {
                 {/* <button onClick={() => {history.push("/Signup")}}>회원가입</button>
                 <button onClick={() => {history.push("/Login")}}>로그인</button> */}
             <Stack direction="row" spacing={1}>
-            <Button onClick={() => {history.push("/Signup")}}>회원가입</Button>
+            <Button onClick={() => {history.push("/Singup")}}>회원가입</Button>
             <Button onClick={() => {history.push("/Login")}}>로그인</Button>
             </Stack>
             </div>
