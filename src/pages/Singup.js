@@ -1,7 +1,8 @@
-<<<<<<< HEAD
+
 import React from "react";
 import "../css/Singup.css";
 import SingupImage from "../css/main.png";
+
 
 const Singup = () => {
     return (
@@ -41,16 +42,5 @@ const Singup = () => {
         </div>
     )
 }
-=======
-import React from 'react';
-
-const Singup = () => {
-    return (
-        <div>
-            회원가입
-        </div>
-    );
-};
->>>>>>> 32442c2c289a201954b3896abc61ab4f7b9e9872
 
 export default Singup;

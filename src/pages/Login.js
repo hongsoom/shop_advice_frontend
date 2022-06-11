@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React from "react";
 import "../css/Login.css";
 import LoginImage from "../css/main.png";
@@ -29,16 +29,5 @@ const Login = () => {
         </div>
     )
 }
-=======
-import React from 'react';
-
-const Login = () => {
-    return (
-        <div>
-            로그인
-        </div>
-    );
-};
->>>>>>> 32442c2c289a201954b3896abc61ab4f7b9e9872
 
 export default Login;
