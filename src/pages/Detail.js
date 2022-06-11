@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import Comment from "../components/comment";
 import test from "../css/test.png";
@@ -32,5 +33,16 @@ const Detail = () => {
         </div>
     )
 }
+=======
+import React from 'react';
+
+const Detail = () => {
+    return (
+        <div>
+            상세페이지야!
+        </div>
+    );
+};
+>>>>>>> 32442c2c289a201954b3896abc61ab4f7b9e9872
 
 export default Detail;
