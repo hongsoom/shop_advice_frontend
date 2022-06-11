@@ -20,7 +20,8 @@ const Header = () => {
         <div className ="Wrapper">
             <div className = "Logo" onClick={() => {history.push("/")}}>
                 <img src={Logo} alt=""/>
-            </div>                     
+            </div>
+            <div></div>                     
             {/* {is_login ? (
             <div className='Content'>
                 <p> `${name}님 환영합니다!`</p>

@@ -12,7 +12,7 @@ const comment = () => {
             <div className="comment-list-container">
                 <div className="comment-list-content">
                     <div className="comment-user-content">
-                        <img src={profile}/>
+                        <img src={profile} alt=''/>
                         <p>sumin</p>
                     </div>
                     <div className="comment-btn-content">    

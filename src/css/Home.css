@@ -17,10 +17,14 @@
     width: 200px;
 }
 
-.Logo  img{    
+.Logo > img{    
     height : 80%;
     width: 80%;
 }
+.Home {
+    width: 80%;
+    text-align: right;
+};
 .Nav{
     display : flex;
     flex-direction: row;
@@ -35,17 +39,16 @@ button{
     text-align : center;
     font-size: 14px;
     color: #0d6efd;
+    justify-content : flex-end;
     font-family: 'Source Sans Pro', sans-serif;
     background-color: rgb(255, 255, 255);
 }
-.Content{
-    display : flex;
-    flex-direction: row;
-    flex-wrap : nowrap;
-    justify-content : flex-end;
+.gowrite{
+    display : inline-block;
     height: 40px;    
     margin-top: 10px;
-    margin-right: 10px;
+    margin-left: auto;
+    margin-right: 20px;
 }
 .dropdown{
     display : flex;
@@ -58,22 +61,23 @@ button{
     align-items: center;
     flex-wrap: wrap;
     margin: auto;
+    justify-content: center;
 }
 
 .card {
     /* background-color: beige; */
     border: 1px solid #0d6efd;
-    display: block;
+    display: flex;
     border-radius: 22px;
     width: 300px;
     height: 400px;
     padding: 5px;
     box-sizing: border-box;
-    margin: 15px auto;    
-    flex-direction: row;
+    margin: 10px 15px;    
+    flex-direction: column;
 }
 img{
-    width: 200px;
+    width: 250px;
     height: 300px;
     padding: 5px;
     margin: auto;

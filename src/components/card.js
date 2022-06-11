@@ -6,11 +6,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const Card = () => {
     return ( 
         <div className="card" >
-            <img src={test} alt=""/>
-            <div className="icon">
+        <div>
+            <img src={test} alt=""/>                   
+        </div>
+        <div className="icon">
+            <p>Title</p>  
             <FavoriteBorderIcon/>
-            </div>      
-            <p>Title</p>        
+        </div> 
         </div>
 );
 };
