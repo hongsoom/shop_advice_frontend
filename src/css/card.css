@@ -1,0 +1,78 @@
+.Card-container {
+
+}
+
+.Logo{    
+    cursor : pointer;
+    width: 200px;
+}
+
+.Logo > img{    
+    height : 80%;
+    width: 80%;
+}
+.Home {
+    width: 80%;
+    text-align: right;
+};
+.Nav{
+    display : flex;
+    flex-direction: row;
+    flex-wrap : nowrap;
+}
+button{
+    cursor: pointer;
+    height: 36px;
+    padding: 0 12px;    
+    border: none;
+    border-radius: 4px;
+    text-align : center;
+    font-size: 14px;
+    color: #0d6efd;
+    justify-content : flex-end;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+.gowrite{
+    display : inline-block;
+    height: 40px;    
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+.dropdown{
+    display : flex;
+    justify-content : flex-end;
+    margin-right: 5px;
+}
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+}
+
+.card {
+    /* background-color: beige; */
+    border: 1px solid #0d6efd;
+    display: flex;
+    border-radius: 22px;
+    width: 300px;
+    height: 400px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 10px 15px;    
+    flex-direction: column;
+}
+
+p{
+    font-size : 20px;
+    font-weight : 700;
+    color: #0d6efd;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.icon{
+    display:flex;
+}
