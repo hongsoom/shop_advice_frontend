@@ -1,0 +1,48 @@
+.title{
+    /* font-size : 20px;
+    font-weight : 900; */
+    font-family: 'Merriweather', serif;
+}
+.titlebar{
+    height: 80px;
+    width: 100%;
+}
+.dropdown{
+    display : flex;
+    justify-content : flex-end;
+    margin-right: 5px;
+}
+.Add-container{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 610px;
+    border: 1px solid #cacaca;
+    color: #cacaca;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0 8px;
+}
+.Add-image-pr{
+    height: 300x;
+    width: 250px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+img {
+    max-width: 50%;
+    margin-bottom : 50px;
+}
+.Add-text-pr{
+    height: 300x;
+    width: 250px;
+}
+.Add-link{
+    height: 50x;
+    width: 250px;
+}
+.Add-title-contetnt{
+    height: 150x;
+    width: 800px;
+}
