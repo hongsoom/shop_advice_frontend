@@ -1,17 +1,23 @@
 .Header-container {
-    background-color: aqua;
+    border: 2px solid #D9D9D9;
+    height: 100%;
 }
 
 .Header-content {
     display: flex;
     flex-direction: row;
-    
 }
 
 .Header-content > a > img {
-    display: flex;
-    justify-content: flex-start;
     height : 100%;
     width : 220px;
     cursor : pointer;
+}
+
+.Header-content > button {
+    cursor : pointer;
+    border: none;
+    background-color: transparent;
+    font-weight: 900;
+    font-size: 18px;
 }

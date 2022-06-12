@@ -13,9 +13,8 @@ const Header = () => {
                 <Link to="/"> 
                     <img src={Logo} alt="Logo" />
                 </Link>
-            </div>
-            <div className="">
-
+                <button onClick={ () => history.push('/Login')}>로그인</button>
+                <button onClick={ () => history.push('/Singup')}>회원가입</button>
             </div>
         </div>
     );
