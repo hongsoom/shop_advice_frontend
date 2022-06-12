@@ -5,12 +5,12 @@ import LoginImage from "../css/main.png";
 
 const Login = () => {
     return (
-        <div className="Login-container">
-            <div className="Login-content-container">
-                <div className="Login-image-content">
+        <div className="Login_container">
+            <div className="Login_content">
+                <div className="Login_image">
                     <img src={LoginImage} alt="main"/>
                 </div>
-                <div className="Login-input-content">
+                <div className="Login_input">
                     <p className="title">로그인</p>
 
                     <label>아이디</label>
@@ -19,7 +19,7 @@ const Login = () => {
                     <label>비밀번호</label>
                     <input label="비밀번호" placeholder="비밀번호를 입력해주세요." />
 
-                    <button className="Login-btn">로그인</button>
+                    <button className="Login_btn">로그인</button>
 
                     <p>계정이 없으신가요? &nbsp;
                         <a href={"/Singup"}>회원가입</a>

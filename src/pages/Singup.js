@@ -1,4 +1,3 @@
-
 import React from "react";
 import "../css/Singup.css";
 import SingupImage from "../css/main.png";
@@ -6,22 +5,22 @@ import SingupImage from "../css/main.png";
 
 const Singup = () => {
     return (
-        <div className="Singup-container">
-            <div className="Singup-content">
-                <div className="Singup-image-content">
+        <div className="Singup_container">
+            <div className="Singup_content">
+                <div className="Singup_image">
                     <img src={SingupImage} alt="main"/>
                 </div>
-                <div className="Singup-input-content">
+                <div className="Singup_input">
                     <p className="title">회원가입</p>
-
+                    
                     <label>아이디</label>
-                    <div className="Singup-id-content">
+                    <div className="Singup_id">
                         <input label="아이디" placeholder="아이디를 입력해주세요" />
                         <button>중복확인</button>
                     </div>
 
                     <label>닉네임</label>
-                    <div className="Singup-nickname-content">
+                    <div className="Singup_nickname">
                         <input label="닉네임" placeholder="닉네임을 입력해주세요" />
                         <button>중복확인</button>
                     </div>
@@ -32,10 +31,10 @@ const Singup = () => {
                     <label>비밀번호 확인</label>
                     <input label="비밀번호 확인" placeholder="비밀번호를 다시 입력해주세요." />
 
-                    <button className="Singup-btn-content">회원가입</button>
+                    <button className="Singup_btn">회원가입</button>
 
                     <p>계정이 있으신가요? &nbsp;
-                     <a href={"/Login"}>로그인</a>
+                        <a href={"/Login"}>로그인</a>
                     </p>
                 </div>
             </div>
