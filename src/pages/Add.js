@@ -36,20 +36,20 @@ const Add = () => {
         reader.onload = function(e) { 
             setPreview(e.target.result);
         }
-        console.log(file_link_ref.current)
+        console.log(file_link_ref.current);
         // const file_url = await getDownloadURL(uploded_file.ref);
 
         // file_link_ref.current = { url : file_url };
     }
-    // const onClickuploadFB = async () => {
-    //     console.log(uploadFB.file_link_ref.current);
-    // }
+    const onClickuploadFB = async () => {
+        console.log(file_link_ref.current);
+    }
     // 추가하기 액션
     const add = () => {
         dispatch(addMagazine({
         title,
         text,
-        image_url : file_link_ref.current.url,
+        // image_url : file_link_ref.current.url,
         date : new Date().toLocaleString(),
         name,
     }))
@@ -63,9 +63,9 @@ const Add = () => {
                     <input type="text" placeholder="제목을 입력해주세요" />
                     {/* 드롭박스 */}
                     <select> 
-                        <option selected>카테고리▼</option>
-                        <option>남성복</option>
-                        <option>여성복</option>
+                        <option value="">카테고리▼</option>
+                        <option value="M">남성복</option>
+                        <option value="F">여성복</option>
                     </select> 
             </div>
             <div className="Add_input">
@@ -77,8 +77,8 @@ const Add = () => {
                     accept="image/jpg, image/jpeg, image/png"
                     style={{display: 'none'}}
                     onChange={uploadFB}></input> */}
-                    <input type="submit" id="submit" value="이미지첨부"></input> 
-                    {/* <input type="button" onClick={onClickuploadFB} value="이미지첨부"></input>                   */}
+                    {/* <input type="submit" id="submit" value="이미지첨부"></input>  */}
+                    <button onClick={onClickuploadFB}>이미지첨부</button>                  
             </div>
             {/* 미리보기 */}
             <div className="Add_container">

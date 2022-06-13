@@ -37,7 +37,7 @@
     border: 1px solid #26BCF7;
     justify-content : center;
 }
-.Add_input > input > submit {
+.Add_input > button {
     text-align :center;
     margin: 10px 10px auto;
     height: 48px;
