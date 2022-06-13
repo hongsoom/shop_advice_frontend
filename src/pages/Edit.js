@@ -1,6 +1,6 @@
 import React from 'react';
 import "../css/Edit.css";
-import TestImage from "../css/test.png";
+import TestImage from "../assets/test.png";
 
 const Edit = () => {
     return (

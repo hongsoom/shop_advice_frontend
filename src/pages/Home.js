@@ -19,12 +19,12 @@ const Home = () => {
     return (        
         <div className="Home-container">
             <div className="Home-content">
-            <Select
+            {/* <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             value={category}
             onChange={handleChange}
-            label="Category" />
+            label="Category" /> */}
                 <button onClick={() => history.push('/Add')}>작성하러가기</button>
                 <Card />
             </div>     
