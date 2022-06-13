@@ -25,7 +25,7 @@ export const Logout = (user) => {
 
 // middlewares
 export const SingupFB = (userId, nickname ,password, passwordCheck) => {
-    return async function (dispatch) {
+    return async function (dispatch, {history}) {
         instance
         .post(`/api/user/signup`, {
           userId: userId,
@@ -47,7 +47,7 @@ export const SingupFB = (userId, nickname ,password, passwordCheck) => {
 }
 
 export const LoginFB = (userId, password) => {
-    return async function (dispatch) {
+    return async function (dispatch, {history}) {
         instance
       .post("/api/user/login", {
         userId: userId,
@@ -61,7 +61,7 @@ export const LoginFB = (userId, password) => {
         localStorage.setItem("loginUserId", response.data.userId)
         localStorage.setItem("loginUserName", response.data.nickname)
 
-        dispatch(Login({ userId : nickname}))
+        dispatch(Login({ userId : userId}))
 
         const message = response.data.message
         window.alert(message);
@@ -78,24 +78,8 @@ export const LoginFB = (userId, password) => {
 
 export const UserCheck = () => {
     return async function(dispatch) {
-        instance
-        .post("/user/check/email", { userId: userId })
-        .then((response) => {
-          dispatch(idCheck({ response }))
-          window.alert("사용 가능한 아이디 입니다.")
-        })
-        .catch((error) => {
-          const error_message = error.response.data.result
-          if (error_message === "false") {
-            window.alert("사용 중인 아이디 입니다!")
-            localStorage.setItem("checkId", "false")
-          }
-        })
     }
   }
-    }
-}
-
 
 
 export const LogoutFB = () => {
