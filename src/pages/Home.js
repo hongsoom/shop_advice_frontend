@@ -3,14 +3,11 @@ import '../css/Home.css';
 import { useHistory } from 'react-router-dom';
 import Card from "../components/card";
 import { useSelector, useDispatch } from "react-redux";
-import { loadMagazine } from "../redux/modules/card";
-
-// import { auth } from "../shared/firebase";
 
 const Home = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    // const is_login = useSelector((state) => state.user.is_login);
+    const is_login = useSelector((state) => state.user.is_login);
     
 
     const [category, setCategory] = React.useState('');

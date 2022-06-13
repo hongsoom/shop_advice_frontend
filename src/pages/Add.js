@@ -101,7 +101,7 @@ const Add = () => {
                 </div>                
                 <div className="Pre_input">
                     <textarea 
-                    placeholder="내용을 적어주세요"
+                    placeholder="내용 미리보기"
                     type="text" value={content} 
                     readOnly
                     >내용 미리보기</textarea>
