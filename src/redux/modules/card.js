@@ -31,6 +31,14 @@ export function addMagazine(magazine) {
 // }
 
 // middlewares
+export const addMagazineFB = (magazine) => {
+    return async function (dispatch) {
+    // const docRef = await addDoc(collection(db, "magazines"), magazine);
+    const magazine_data = {id: magazine.id, ...magazine};
+
+    dispatch(addMagazine(magazine_data));
+}
+}
 
 // reducer
 export default function reducer(state = initialState, action = {}) {

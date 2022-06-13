@@ -4,7 +4,7 @@ import "../css/Add.css";
 import { useHistory } from 'react-router-dom';
 import { useRef, useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
-import { addMagazine } from "../redux/modules/card";
+import { addMagazineFB } from "../redux/modules/card";
 
 const Add = () => {
     const history = useHistory();
@@ -16,8 +16,11 @@ const Add = () => {
     const [title, setTitle] = useState("");
     const name = React.useRef(null);
     // const name = useSelector((state) => state.user.name);
-
-    const file_link_ref = useRef(null);
+    // 잘가져왔는지 확인
+    // React.useEffect(() => {
+    //     dispatch(loadMagazine());}, []);
+    
+        const file_link_ref = useRef(null);
 
     // 이미지 업로드
     const uploadFB = async (e) => {
@@ -42,17 +45,20 @@ const Add = () => {
         // file_link_ref.current = { url : file_url };
     }
     const onClickuploadFB = async () => {
+        // 테스트를 위해 임의값 넣어줌
+        file_link_ref.current = "https://www.automatetheplanet.com/wp-content/uploads/2015/06/Test-URL-Redirects-WebDriver.jpg";
         console.log(file_link_ref.current);
     }
     // 추가하기 액션
-    const add = () => {
-        dispatch(addMagazine({
+    const add = async() => {
+        dispatch(addMagazineFB({
         title,
         text,
-        // image_url : file_link_ref.current.url,
+        image_url : file_link_ref.current?.url,
         date : new Date().toLocaleString(),
         name,
     }))
+    console.log(add);
     history.push('/');
     }
 
@@ -87,7 +93,10 @@ const Add = () => {
                     <img src={preview} alt=''/>
                 </div>                
                 <div className="Pre_input">
-                    <prewrite>내용 미리보기</prewrite>
+                    <textarea 
+                    placeholder="내용을 적어주세요"
+                    type="text" value={text} 
+                    onChange={(e) => { setText(e.target.value);}}>내용 미리보기</textarea>
                 </div>                
             </div>
             <div className="Add_container">
@@ -99,10 +108,9 @@ const Add = () => {
                     <input type="text" placeholder="가격을 적어주세요" />
                 </div>                
             </div>
-            <div className='Write_container'>
-                {/* <input type="text" placeholder="내용을 적어주세요" /> */}
+            {/* <div className='Write_container'>
                 <textarea type="text" placeholder="내용을 적어주세요" ></textarea>
-            </div>
+            </div> */}
             <div className="Add_container">
                 <div className='Add_write'>
                     <button onClick={add}>작성하기</button>
