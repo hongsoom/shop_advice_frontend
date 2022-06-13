@@ -4,7 +4,7 @@ import "../css/Add.css";
 import { useHistory } from 'react-router-dom';
 import { useRef, useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
-import { addMagazine, loadMagazine } from "../redux/modules/card";
+import { addMagazine } from "../redux/modules/card";
 
 const Add = () => {
     const history = useHistory();
@@ -13,16 +13,13 @@ const Add = () => {
     const [preview, setPreview ] = useState("");
     const [imageName, setimageName ] = useState("");
     const [content, setContent] = useState("");
-    const [title, setTitle] = useState("");
     const [shopUrl, setShopUrl] = useState("");
-    const [price, setPrice] = useState("");
+    const titleInput = React.useRef(null);
+    // const shopUrl = React.useRef(null);
+    const price = React.useRef(null);
     const [category, setCategory] = useState("");
     
     const name = useSelector((state) => state.user.name);
-    console.log(name);
-    // 잘가져왔는지 확인
-    React.useEffect(() => {
-        dispatch(loadMagazine());}, []);
     
     const file_link_ref = useRef(null);
 
@@ -56,12 +53,13 @@ const Add = () => {
     // 추가하기 액션
     const add = () => {
         dispatch(addMagazine({
-        title,
+        title: titleInput.current.value,
         content,
-        imageUrl : file_link_ref.current?.url,
+        imageUrl : file_link_ref.current.url,
+        shopUrl,
         date : new Date().toLocaleString(),
         name,
-        price,
+        price : price.current.value,
         category
     }))
     console.log(add);
@@ -70,11 +68,13 @@ const Add = () => {
 
     return (
         <div className="Add">
-            <div className="add_title">게시글 작성</div>
+            <div className="add_title" >게시글 작성</div>
             <div className="Title_input">
-                    <input type="text" placeholder="제목을 입력해주세요" />
+                    <input type="text" placeholder="제목을 입력해주세요" 
+                    ref={titleInput}/>
                     {/* 드롭박스 */}
-                    <select> 
+                    <select value={category}
+                    onChange={(e) => { setCategory(e.target.value);}}> 
                         <option value="">카테고리▼</option>
                         <option value="M">남성복</option>
                         <option value="F">여성복</option>
@@ -82,7 +82,8 @@ const Add = () => {
             </div>
             <div className="Add_input">
                     <input type="file" id="file" 
-                    accept="image/jpg, image/jpeg, image/png" onChange={uploadFB} />
+                    accept="image/jpg, image/jpeg, image/png" 
+                    defaltvalue="imageName" onChange={uploadFB} />
                     {/* <input type="text" 
                     label="이미지" placeholder="이미지를 첨부해주세요" />
                     <input type="file" id="file" 
@@ -102,23 +103,27 @@ const Add = () => {
                     <textarea 
                     placeholder="내용을 적어주세요"
                     type="text" value={content} 
-                    onChange={(e) => { setContent(e.target.value);}}>내용 미리보기</textarea>
+                    readOnly
+                    >내용 미리보기</textarea>
                 </div>                
             </div>
             <div className="Add_container">
                     {/* 미리보기 밑 박스 */}
                 <div className="Link_input">
                     <input type="text" placeholder="구매처 링크를 적어주세요"
-                    value={shopUrl}/>
+                    onChange={(e) => { setShopUrl(e.target.value);}}/>
                 </div>                
                 <div className="Link_input">
                     <input type="text" placeholder="가격을 적어주세요" 
-                    value={price}/>
+                    ref={price}/>
                 </div>                
             </div>
-            {/* <div className='Write_container'>
-                <textarea type="text" placeholder="내용을 적어주세요" ></textarea>
-            </div> */}
+            <div className='Write_container'>
+                <textarea type="text" defaltvalue={content}
+                placeholder="내용을 적어주세요" 
+                onChange={(e) => {setContent(e.target.value);}}
+                ></textarea>
+            </div>
             <div className="Add_container">
                 <div className='Add_write'>
                     <button onClick={add}>작성하기</button>
