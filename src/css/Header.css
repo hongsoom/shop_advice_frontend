@@ -1,11 +1,14 @@
 .Header-container {
     border: 2px solid #D9D9D9;
-    height: 100%;
 }
 
 .Header-content {
     display: flex;
     flex-direction: row;
+}
+
+.Header-content > a {
+    margin-left : 10px;
 }
 
 .Header-content > a > img {
@@ -20,4 +23,18 @@
     background-color: transparent;
     font-weight: 900;
     font-size: 18px;
+}
+
+.Login_btn2 {
+    margin-right: 20px;
+}
+
+.Singup_btn2 {
+    margin: 0 100px 0 0;
+}
+
+@media screen and (min-width : 350px) and (max-width : 850px) {
+    .Singup_btn2 {
+        margin: 0 50px 0 0;
+    }
 }

@@ -1,82 +1,96 @@
-.Detail-container {
+.Detail_container {
     width : 100%;
-    margin-top: 50px;
+    margin-top: 30px;
     padding: 0% 15%;
 }
 
-.Detail-content-container {
+.Detail_content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap : nowrap;
 }
 
-.Detail-user-contetnt {
+.Detail_image {
+    display: flex;
+    flex-direction: column;
+}
+
+.Detail_user {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
+    align-items: center;
+    margin : 0 0 10px 0;
 }
 
-.Detail-user-contetnt > img{
+.Detail_user > img{
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    margin : 0;
 }
 
-.Detail-user-contetnt > p {
-    margin: 10px;
+.Detail_user > p {
+    margin-left: 0;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 900;
 }
 
-.Detail-image-container {
+.Detail_poto {
     display: flex;
     flex-direction: column;
 }
 
-.Detail-image-contetnt {
+.Detail_poto > img {
     width : 500px;
-    height: 500px;
-    overflow: hidden;
-    position: relative;
+    height: 600px;
 }
 
-.Detail-image-contetnt > img {
-    position: absolute;
-    width: 100%;
+.Detail_poto > p {
+    margin-right: 0;
+    font-size: 15px;
+    font-weight: 900;
 }
 
-.Detail-contetnt {
+.Detail_infor {
     display: flex;
     flex-direction: column;
-    font-family: 'Merriweather', serif;
-    font-size : 15px;
-    margin : 50px;
+    position : relative;
+    left : 20px;
+    top : 100px;
 }
 
-.Detail-contetnt > p {
-    margin-bottom: 20px;
+.content {
+    margin-bottom: 100px;
 }
 
-.Detail-title-contetnt {
+.Detail_title {
     display: flex;
     flex-direction: row;
 }
 
-.Detail-title-contetnt > p {
+.Detail_title > p {
     box-sizing: content-box;
     text-align: center;
-    margin : 15px;
     background-color: #26BCF7;
     border: 1px solid #26BCF7;
 }
 
 
-.Detail-contetnt > button {
+.Detail_infor > button {
     width : 300px;
     height: 40px;
     background-color: #26BCF7;
     border: 1px solid #26BCF7;
     border-radius: 10px;
-    margin-bottom: 10px;;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
+
+@media screen and (min-width : 500px) and (max-width : 1000px) {
+    .Detail_content {
+        flex-direction: column;
+    }
+    .Detail_infor {
+        top : 50px;
+    }
+  }
