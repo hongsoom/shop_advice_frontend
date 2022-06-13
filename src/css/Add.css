@@ -37,7 +37,7 @@
     border: 1px solid #26BCF7;
     justify-content : center;
 }
-.Add_input > button {
+.Add_input > input > submit {
     text-align :center;
     margin: 10px 10px auto;
     height: 48px;
@@ -68,7 +68,7 @@
 }
 
 /* 미리보기 */
-.Pre_input > box,
+.Pre_input > .prewrite,
 .Pre_input > img {
     text-align :center;
     flex: 1;
