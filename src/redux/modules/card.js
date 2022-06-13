@@ -8,7 +8,15 @@ const ADD = 'magazines/ADD';
 
 // 초기 상태값
 const initialState = {
-magazine : [
+magazine : [ {
+    id : 0,
+    title : "이 바지를 사고 싶어요",
+    imageUrl: "/images/pants.png",
+    shopUrl: "www.naver.com",
+    content: "마음에 들어요",
+    price: "50000",
+    category: "남성복"
+}
 ],
 };
 

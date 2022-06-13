@@ -4,7 +4,7 @@ import "../css/Add.css";
 import { useHistory } from 'react-router-dom';
 import { useRef, useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
-import { addMagazineFB } from "../redux/modules/card";
+import { addMagazine, loadMagazine } from "../redux/modules/card";
 
 const Add = () => {
     const history = useHistory();
@@ -12,15 +12,19 @@ const Add = () => {
     // 미리보기
     const [preview, setPreview ] = useState("");
     const [imageName, setimageName ] = useState("");
-    const [text, setText] = useState("");
+    const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
-    const name = React.useRef(null);
-    // const name = useSelector((state) => state.user.name);
-    // 잘가져왔는지 확인
-    // React.useEffect(() => {
-    //     dispatch(loadMagazine());}, []);
+    const [shopUrl, setShopUrl] = useState("");
+    const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
     
-        const file_link_ref = useRef(null);
+    const name = useSelector((state) => state.user.name);
+    console.log(name);
+    // 잘가져왔는지 확인
+    React.useEffect(() => {
+        dispatch(loadMagazine());}, []);
+    
+    const file_link_ref = useRef(null);
 
     // 이미지 업로드
     const uploadFB = async (e) => {
@@ -34,7 +38,7 @@ const Add = () => {
         
         setimageName(file.name);
         // 콘솔로 확인해보기
-        console.log(reader, file);
+        // console.log(reader, file);
         reader.readAsDataURL(file);
         reader.onload = function(e) { 
             setPreview(e.target.result);
@@ -50,13 +54,15 @@ const Add = () => {
         console.log(file_link_ref.current);
     }
     // 추가하기 액션
-    const add = async() => {
-        dispatch(addMagazineFB({
+    const add = () => {
+        dispatch(addMagazine({
         title,
-        text,
-        image_url : file_link_ref.current?.url,
+        content,
+        imageUrl : file_link_ref.current?.url,
         date : new Date().toLocaleString(),
         name,
+        price,
+        category
     }))
     console.log(add);
     history.push('/');
@@ -95,17 +101,19 @@ const Add = () => {
                 <div className="Pre_input">
                     <textarea 
                     placeholder="내용을 적어주세요"
-                    type="text" value={text} 
-                    onChange={(e) => { setText(e.target.value);}}>내용 미리보기</textarea>
+                    type="text" value={content} 
+                    onChange={(e) => { setContent(e.target.value);}}>내용 미리보기</textarea>
                 </div>                
             </div>
             <div className="Add_container">
                     {/* 미리보기 밑 박스 */}
                 <div className="Link_input">
-                    <input type="text" placeholder="구매처 링크를 적어주세요" />
+                    <input type="text" placeholder="구매처 링크를 적어주세요"
+                    value={shopUrl}/>
                 </div>                
                 <div className="Link_input">
-                    <input type="text" placeholder="가격을 적어주세요" />
+                    <input type="text" placeholder="가격을 적어주세요" 
+                    value={price}/>
                 </div>                
             </div>
             {/* <div className='Write_container'>

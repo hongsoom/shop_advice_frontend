@@ -11,11 +11,7 @@ const Home = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
     // const is_login = useSelector((state) => state.user.is_login);
-    // 잘가져왔는지 확인
-    const data = useSelector((state) => state.card.magazine);
-    console.log(data);
-    React.useEffect(() => {
-        dispatch(loadMagazine());}, []);
+    
 
     const [category, setCategory] = React.useState('');
 
