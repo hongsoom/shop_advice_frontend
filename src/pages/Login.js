@@ -27,10 +27,10 @@ const Login = () => {
                     <p className="title">로그인</p>
 
                     <label>아이디</label>
-                    <input label="아이디" placeholder="아이디를 입력해주세요"  onChange={(e) => setuserId(e.target.value)} />
+                    <input type="text" label="아이디" placeholder="아이디를 입력해주세요"  onChange={(e) => setuserId(e.target.value)} />
 
                     <label>비밀번호</label>
-                    <input label="비밀번호" placeholder="비밀번호를 입력해주세요." onChange={(e) => setpassword(e.target.value)} />
+                    <input type="password" label="비밀번호" placeholder="비밀번호를 입력해주세요." onChange={(e) => setpassword(e.target.value)} />
 
                     <button onClick={login} className="Login_btn" disabled={userId === "" || password === "" ? true : false}>로그인</button>
 

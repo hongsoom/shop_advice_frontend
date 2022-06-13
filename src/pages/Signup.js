@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux"; 
-import { SingupFB } from "../redux/modules/user";
+import { SignupFB } from "../redux/modules/user";
 import "../css/Singup.css";
 import SingupImage from "../assets/main.png";
 
-const Singup = () => {
+const Signup = () => {
 
     const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const Singup = () => {
     const [passwordCheck, setpasswordCheck] = React.useState("");
 
     const signup = () => {
-        dispatch(SingupFB(
+        dispatch(SignupFB(
             userId, nickname, password, passwordCheck
         ))
     }
@@ -57,4 +57,4 @@ const Singup = () => {
     )
 }
 
-export default Singup;
+export default Signup;

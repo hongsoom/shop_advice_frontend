@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./redux/configureStore";
 
@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import Add from "./pages/Add";
 import Edit from "./pages/Edit";
 import Detail from "./pages/Detail";
-import Singup from "./pages/Singup";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
 function App() {
@@ -16,14 +16,14 @@ function App() {
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */}      
       <Header />
-      <ConnectedRouter history={history}>
+      <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Detail" component={Detail} />
         <Route exact path="/Add" component={Add} />
         <Route exact path="/Edit/:index/:id" component={Edit} />        
-        <Route exact path="/Singup" component={Singup} />
+        <Route exact path="/Signup" component={Signup} />
         <Route exact path="/Login" component={Login} />
-      </ConnectedRouter>
+      </Switch>
     </div>
   );
 }

@@ -14,7 +14,7 @@ const Header = () => {
                     <img src={Logo} alt="Logo" />
                 </Link>
                 <button className="Login_btn2" onClick={ () => history.push('/Login')}>로그인</button>
-                <button className="Singup_btn2" onClick={ () => history.push('/Singup')}>회원가입</button>
+                <button className="Singup_btn2" onClick={ () => history.push('/Signup')}>회원가입</button>
             </div>
         </div>
     );
