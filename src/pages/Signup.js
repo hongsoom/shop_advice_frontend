@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux"; 
-import { SignupFB } from "../redux/modules/user";
+import { SignupFB, idCheckFB, nicknameCheckFB } from "../redux/modules/user";
 import "../css/Singup.css";
 import SingupImage from "../assets/main.png";
 
@@ -19,6 +19,18 @@ const Signup = () => {
         ))
     }
 
+    const idCheck = () => {
+        dispatch(idCheckFB(
+            userId
+        ))
+    }
+
+    const nicknameCheck = () => {
+        dispatch(nicknameCheckFB(
+            nickname
+        ))
+    }
+
     return (
         <div className="Singup_container">
             <div className="Singup_content">
@@ -31,13 +43,13 @@ const Signup = () => {
                     <label>아이디</label>
                     <div className="Singup_id">
                         <input type="text" label="아이디" placeholder="아이디를 입력해주세요"  onChange={(e) => setuserId(e.target.value)}/>
-                        <button>중복확인</button>
+                        <button onClick={idCheck}>중복확인</button>
                     </div>
 
                     <label>닉네임</label>
                     <div className="Singup_nickname">
                         <input type="text" label="닉네임" placeholder="닉네임을 입력해주세요" onChange={(e) => setnickname(e.target.value)}/>
-                        <button>중복확인</button>
+                        <button onClick={nicknameCheck}>중복확인</button>
                     </div>
 
                     <label>비밀번호</label>

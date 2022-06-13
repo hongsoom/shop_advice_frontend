@@ -10,6 +10,7 @@ const Card = () => {
     const history = useHistory();
     // 잘가져왔는지 확인
     const data = useSelector((state) => state.card.magazine);
+<<<<<<< HEAD
     // get요청 확인
     // const callAxios = () => {
     //     axios(
@@ -24,6 +25,7 @@ const Card = () => {
     // React.useEffect(() => {
     //     callAxios();
     // })
+=======
     
     return ( 
         <div className="Card_container">

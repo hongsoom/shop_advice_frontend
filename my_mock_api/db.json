@@ -1,0 +1,59 @@
+{
+  "Signup": [
+    {
+      "userId": "test",
+      "nickname": "test",
+      "password": "test",
+      "passwordCheck": "test",
+      "id": 1
+    },
+    {
+      "userId": "sumin",
+      "nickname": "sumin",
+      "password": "1234",
+      "passwordCheck": "1234",
+      "id": 2
+    },
+    {
+      "userId": "ㅅㄷㄴ",
+      "nickname": "ㅅㄷ",
+      "password": "a",
+      "passwordCheck": "df",
+      "id": 3
+    },
+    {
+      "userId": "test",
+      "nickname": "test",
+      "password": "test",
+      "passwordCheck": "test",
+      "id": 4
+    }
+  ],
+  "Login": [
+    {
+      "userId": "test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "userId": "test",
+      "password": "test",
+      "id": 2
+    },
+    {
+      "userId": "sumin",
+      "password": "1234",
+      "id": 3
+    },
+    {
+      "userId": "adsf",
+      "password": "dafsads",
+      "id": 4
+    },
+    {
+      "userId": "tes",
+      "password": "te",
+      "id": 5
+    }
+  ]
+}
