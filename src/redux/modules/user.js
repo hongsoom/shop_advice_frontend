@@ -29,9 +29,9 @@ export const Logout = (user) => {
 // middlewares
 export const SignupFB = (userId, nickname ,password, passwordCheck) => {
   console.log(userId, nickname, password, passwordCheck)
-    return async function (dispatch) {
+    return async function (dispatch, {history}) {
       const _signup = await axios
-        .post("http://localhost:5001/Signup", {
+        .post("http://3.34.42.87:3000/api/user/signup", {
           userId: userId,
           nickname: nickname,
           password: password,
@@ -40,13 +40,14 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
         .then((response) => {
             console.log(response)
             dispatch(Singup(userId, nickname, password))
-            const message = response.data.message
 
-            window.alert("회원가입 했습니다!");
-            window.location.assign("/Login");
+            const message = response.data.message
+            window.alert(message);
+
+            history.push("/Login");
         })
         .catch((error) => {
-          const err_message = error.response.data.errorMessage;
+          const err_message = error.response.errorMessage;
           window.alert(err_message)
         })
     }
@@ -56,20 +57,22 @@ export const LoginFB = (userId, password) => {
   console.log(userId, password)
     return async function (dispatch, {history}) {
       const _login = await axios
-      .post("http://localhost:5001/Login", {
+      .post("http://3.34.42.87:3000/api/user/login", {
         userId: userId,
         password: password,
       })
       .then((response) => {
+        console.log(response)
 
         const token = response.data.token
         localStorage.setItem("token", token)
 
-        dispatch(UsercheckFB())
+        console.log(token)
 
         const message = response.data.message
-        window.alert("로그인 했습니다!");
-        window.location.assign("/");
+        window.alert(message);
+
+        history.push("/");
       })
       .catch((error) => {
         const err_message = error.response.data.errorMessage;
@@ -78,10 +81,10 @@ export const LoginFB = (userId, password) => {
     }
 }
 
-export const UsercheckFB = () => {
+export const logincheckFB = () => {
     return async function(dispatch) {
         await axios
-        .get("http://localhost:5001/me") 
+        .get("http://3.34.42.87:3000/api/user/me") 
         .then((response) => {
            console.log(response);
 
@@ -94,6 +97,40 @@ export const UsercheckFB = () => {
           .catch((error) => {
             console.error(error)
           })
+    }
+  }
+
+export const idCheckFB = (userId) => {
+    return async function (dispatch, getState, { history }) {
+      await axios
+        .get("http://3.34.42.87:3000/api/user/dup_userId", { userId: userId })
+        .then((response) => {
+          console.log(response);
+
+          const message = response.data.message
+          window.alert(message);
+        })
+        .catch((error) => {
+          const error_message = error.response.data.errorMessage 
+            window.alert(error_message)
+        })
+    }
+  }
+
+  export const nicknameCheckFB = (nickname) => {
+    return async function (dispatch, getState, { history }) {
+      await axios
+        .get("http://3.34.42.87:3000/api/user/dup_nickname", { nickname: nickname })
+        .then((response) => {
+          console.log(response);
+
+          const message = response.data.message
+          window.alert(message);
+        })
+        .catch((error) => {
+          const error_message = error.response.data.errorMessage 
+            window.alert(error_message)
+        })
     }
   }
 

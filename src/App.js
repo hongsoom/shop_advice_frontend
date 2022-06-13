@@ -1,8 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { history } from "./redux/configureStore";
-
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
