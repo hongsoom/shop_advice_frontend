@@ -44,12 +44,16 @@
     border: 2px solid #26BCF7;
 }
 
-.Singup_input > input::placeholder {
+.Singup_input > input::placeholder,
+.Singup_id > input::placeholder,
+.Singup_nickname > input::placeholder {
     color:#D9D9D9;
     font-size : 15px;
 }
 
-.Singup_input > input:focus {
+.Singup_input > input:focus,
+.Singup_id > input:focus,
+.Singup_nickname > input:focus {
     outline: none;
     box-shadow: 0 0 3px #26BCF7;
 }
@@ -90,3 +94,16 @@
     color: black;
     font-weight: bold;
 }
+
+@media screen and (min-width : 350px) and (max-width : 850px) {
+    .Singup_image > img {
+        display : none;
+    }
+}
+
+@media screen and (min-width : 850px) and (max-width : 1200px) {
+    .Singup_container{
+        padding: 0% 3%;
+    }
+}
+

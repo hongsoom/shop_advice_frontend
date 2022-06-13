@@ -1,19 +1,17 @@
 import React from 'react';
 import "../css/card.css";
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import test from '../assets/retan.png';
 
 const Card = () => {
-    const history = useHistory();
 
     return ( 
-        <div className="Card-container">
-            <div onClick={() => {history.push("/Detail/:index/:id")}}>
-                <img src={test} alt=""/>                   
-            </div>
-            <div className="icon">
-                <p>Title</p>  
-            </div> 
+        <div className="Card_container">
+            <Link to="/Detail"> 
+                <img src={test} alt="test"/>         
+            </Link>
+            <p>Title</p>  
         </div>
     );
 };

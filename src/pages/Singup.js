@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Singup.css";
-import SingupImage from "../css/main.png";
+import SingupImage from "../assets/main.png";
 
 
 const Singup = () => {

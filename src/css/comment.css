@@ -1,79 +1,107 @@
-.comment-container {
+.comment_container {
     width : 100%;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-.comment-add-container {
+.comment_add {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width : 100%;
+    margin-bottom: 10px;
 }
 
-.comment-add-container > input {
+.comment_add > input {
     text-align :center;
-    width: 900px;
+    width: 70%;
     height: 50px;
     border: 2px solid #26BCF7;
 }
 
-input::placeholder {
+.comment_add > input::placeholder {
     color:#D9D9D9;
     font-size : 15px;
 }
 
-input:focus {
+.comment_add > input:focus {
     outline: none;
     box-shadow: 1px 1px 20px #ddd;
 }
 
-.comment-add-container > button {
+.comment_add > button {
     width: 30%;
     height: 50px;
     text-align :center;
     font-weight: bold;
     background-color: #26BCF7;
     border: 2px solid #26BCF7;
-    cursor: pointer;
     box-shadow: 1px 1px 20px #ddd;
+    cursor : pointer;
 }
 
-.comment-list-container {
+.comment {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border: 1px solid #26BCF7;
-    margin-bottom: 20px;
+    margin-bottom: 10%;
 }
 
-.comment-list-container:hover {
+.comment:hover {
     box-shadow: 1px 1px 20px #ddd;
 }
 
-.comment-list-content {
+.comment_profile {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    margin: 10px;
 }
 
-.comment-user-content {
-    display: flex;
-    flex-direction: row;
-}
-
-.comment-user-content > img{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.comment-user-content > p {
-    font-size : 15px;
+.comment_profile > p {
+    padding : 10px;
+    font-size : 20px;
     font-weight: bold;
 }
 
-.comment-btn-content {
-
+.comment_profile > img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
-.comment-content {
+.comment_list {
     display: flex;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 0;
+}
+
+.comment_list > p {
+    font-size: 20px;
+}
+
+.comment_user {
+    margin: 20px;
+}
+
+.comment_user > span {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+@media screen and (min-width : 350px) and (max-width : 850px) {
+    .comment_profile > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .comment_profile > p,
+    .comment_list > p {
+        font-size : 15px;
+    }
+
+    .comment_user > span {
+        font-size: 20px;
+    }
 }

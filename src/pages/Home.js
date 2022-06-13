@@ -19,9 +19,14 @@ const Home = () => {
     return (        
         <div className="Home-container">
             <div className="Home-content">
-                <button onClick={() => history.push("/Singup")}>회원가입</button>
-                <button onClick={() => history.push("/Login")}>로그인</button>
-                <button onClick={() => history.push("/Detail")}>상세페이지</button>
+            <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={category}
+            onChange={handleChange}
+            label="Category" />
+                <button onClick={() => history.push('/Add')}>작성하러가기</button>
+                <Card />
             </div>     
         </div>
     );

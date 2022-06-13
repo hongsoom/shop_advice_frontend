@@ -5,7 +5,15 @@
 
 .Home-content {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap : nowrap;
+    flex-direction: column;
+}
+
+.Home-content > button {
+    margin-right: 100px;
+    font-weight: bold;
+    background-color: #26BCF7;
+    border: 2px solid #26BCF7;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
 }
