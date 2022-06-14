@@ -47,16 +47,6 @@
     border: 2px solid #26BCF7;
     cursor: pointer;
 }
-/* .Title_input > button {
-    text-align :center;
-    margin: 10px 10px auto;
-    height: 48px;
-    width: 100px;
-    font-weight: bold;
-    border: 2px solid #26BCF7;
-    background-color: white;
-    cursor: pointer;
-} */
 /* 드롭다운 */
 .Title_input > select {
     width: 100px;

@@ -1,12 +1,15 @@
 import instance from "../../shared/Request";
+import { apis } from '../../shared/api';
+
 
 // 게시글 관련 CRUD
 
 // Actions
-const LOAD = 'magazines/LOAD';
+// const LOAD = 'magazines/LOAD';
+const LOAD = 'article/LOAD';
 const ADD = 'magazines/ADD';
-// const MODIFY = 'magazines/MODIFY';
-// const DELETE = 'magazines/DELETE';
+const MODIFY = 'magazines/MODIFY';
+const DELETE = 'magazines/DELETE';
 
 // 초기 상태값
 const initialState = { 
@@ -20,48 +23,34 @@ const initialState = {
         // date : new Date().toLocaleString(),
         // name : ""
     }],
-    // magazine : [ {
-    //     title : "이 바지를 사고 싶어요",
-    //     imageUrl: "test.png",
-    //     shopUrl: "www.naver.com",
-    //     content: "마음에 들어요",
-    //     price: "50000",
-    //     category: "남성복",
-    //     date : new Date().toLocaleString(),
-    //     name : "test name"
-    // }],
 };
 
 // Action Creators
-export function loadMagazine(magazine_list) {
-    return { type: LOAD, magazine_list };
+export function loadAarticles(articles) {
+    return  { type: LOAD, articles };
 }
 // 
 export function addMagazine(magazine) {
     return { type: ADD, magazine };
 }
-
-// export function modifyMagazine(magazine, magazine_index) {
-//     return { type: MODIFY, magazine, magazine_index };
-// }
-
-
-// export function deleteMagazine(magazine_index) {
-//     return { type: DELETE, magazine_index };
-// }
-
-// middlewares
-//local에서 AddmagazineFB구현 확인 
-// export const addMagazineFB = (magazine) => {
-//     return async function (dispatch) {
-//     // const docRef = await addDoc(collection(db, "magazines"), magazine);
-//     const magazine_data = {...magazine};
-//     // const magazine_data = {id: magazine.id, ...magazine};
-//     dispatch(addMagazine(magazine_data));
-// }
-// }
+export function modifyMagazine(magazine, magazine_index) {
+    return { type: MODIFY, magazine, magazine_index };
+}
+export function deleteMagazine(magazine_index) {
+    return { type: DELETE, magazine_index };
+}
 
 // axios
+export const loadMagazineFB  = () => {
+    return async(dispatch, getState) => {
+    await apis.articles()
+    .then((res) => {
+        // console.log(res.data.articles);
+        dispatch(loadAarticles(res.data.articles));        
+    }).catch((err) => {console.error(err)})
+	};}
+    // dispatch(imageCreators.setPreview(null));
+
 export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
     console.log(title, imageUrl, shopUrl, content, price, category)
     return async function (dispatch, getState ) {
@@ -91,29 +80,13 @@ export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category
 }
 
 
-
-
-// export const loadMagazineFB = () => {
-//     return async function (dispatch) {
-//         // const magazine_data = await getDocs(collection(db, "magazines"));
-        
-//         let magazine_list = [];
-//         console.log();
-//         // magazine_data.forEach((doc) => {
-//         //     magazine_list.push({id:doc.id, ...doc.data()});
-//         // });
-
-//         dispatch(loadMagazine(magazine_list));
-//     }
-//     }
-
 // reducer
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
-        case "magazines/LOAD":
-            return state;
-            // return {magazine : action.magazine_list};
-
+        case "article/LOAD":
+            // return state;
+            return {magazine : action.articles};
+                
         case "magazines/ADD": {
             const new_magazine_list = [...state.magazine, action.magazine];
             return { magazine: new_magazine_list };

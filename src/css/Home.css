@@ -1,6 +1,7 @@
 .Home-container {
     width : 100%;
     margin-top: 50px;
+    padding: 20px;
 }
 
 .Home-content {
@@ -16,4 +17,22 @@
     cursor: pointer;
     width: 100px;
     height: 30px;
+}
+
+.select {
+    /* width: 800px;
+    position: relative; */
+    margin: auto;
+    display: flex;
+}
+
+.select > select {
+    display: flex;
+    justify-content : flex-end;
+    width: 100px;
+    height: 48px;
+    padding: .8em .5em; 
+    border: 1px solid #26BCF7;
+    font-family: inherit;
+    margin: 10px 10px auto;
 }
