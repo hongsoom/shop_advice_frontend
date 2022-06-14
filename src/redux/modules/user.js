@@ -29,7 +29,7 @@ export const Logout = (user) => {
 // middlewares
 export const SignupFB = (userId, nickname ,password, passwordCheck) => {
   console.log(userId, nickname, password, passwordCheck)
-    return async function (dispatch, {history}) {
+    return async function (dispatch, getState, {history}) {
       const _signup = await axios
         .post("http://3.34.42.87:3000/api/user/signup", {
           userId: userId,
@@ -47,7 +47,7 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
             history.push("/Login");
         })
         .catch((error) => {
-          const err_message = error.response.errorMessage;
+          const err_message = error.response.data.errorMessage;
           window.alert(err_message)
         })
     }
@@ -55,11 +55,11 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
 
 export const LoginFB = (userId, password) => {
   console.log(userId, password)
-    return async function (dispatch, {history}) {
+    return async function (dispatch, getState, { history }) {
       const _login = await axios
       .post("http://3.34.42.87:3000/api/user/login", {
-        userId: userId,
-        password: password,
+        userId : userId,
+        password : password,
       })
       .then((response) => {
         console.log(response)
@@ -68,9 +68,6 @@ export const LoginFB = (userId, password) => {
         localStorage.setItem("token", token)
 
         console.log(token)
-
-        const message = response.data.message
-        window.alert(message);
 
         history.push("/");
       })
@@ -83,7 +80,7 @@ export const LoginFB = (userId, password) => {
 
 export const logincheckFB = () => {
     return async function(dispatch) {
-        await axios
+        const _logincheck = await axios
         .get("http://3.34.42.87:3000/api/user/me") 
         .then((response) => {
            console.log(response);
@@ -101,9 +98,12 @@ export const logincheckFB = () => {
   }
 
 export const idCheckFB = (userId) => {
-    return async function (dispatch, getState, { history }) {
-      await axios
-        .get("http://3.34.42.87:3000/api/user/dup_userId", { userId: userId })
+  console.log(userId)
+    return async function () {
+      const _idCheck = await axios
+        .get("http://3.34.42.87:3000/api/user/dup_userId", {
+           userId : userId,
+          })
         .then((response) => {
           console.log(response);
 
@@ -111,24 +111,27 @@ export const idCheckFB = (userId) => {
           window.alert(message);
         })
         .catch((error) => {
-          const error_message = error.response.data.errorMessage 
-            window.alert(error_message)
+          const error_message = error.response.data.errorMessage; 
+          window.alert(error_message)
         })
     }
   }
 
   export const nicknameCheckFB = (nickname) => {
-    return async function (dispatch, getState, { history }) {
-      await axios
-        .get("http://3.34.42.87:3000/api/user/dup_nickname", { nickname: nickname })
+    console.log(nickname)
+    return async function () {
+      const _nicknameCheck= await axios
+        .get("http://3.34.42.87:3000/api/user/dup_nickname", { 
+          nickname : nickname,
+        })
         .then((response) => {
           console.log(response);
 
-          const message = response.data.message
+          const message = response.data.message;
           window.alert(message);
         })
         .catch((error) => {
-          const error_message = error.response.data.errorMessage 
+          const error_message = error.response.data.errorMessage;
             window.alert(error_message)
         })
     }
@@ -136,7 +139,7 @@ export const idCheckFB = (userId) => {
 
 export const LogoutFB = () => {
     return function(dispatch) {
-        localStorage.removeItem("userId");
+        localStorage.removeItem("loginUserIdgit");
         dispatch(Logout())
     }
   }
