@@ -14,14 +14,16 @@ const Add = () => {
     const [imageName, setimageName ] = useState("");
     const [content, setContent] = useState("");
     const [shopUrl, setShopUrl] = useState("");
-    const titleInput = React.useRef(null);
+    const [title, setTitle] = useState("");
+    const [price, setPrice] = useState("");
     // const shopUrl = React.useRef(null);
-    const price = React.useRef(null);
+    // const price = React.useRef(null);
     const [category, setCategory] = useState("");
     
     const name = useSelector((state) => state.user.name);
     
     const file_link_ref = useRef(null);
+    const imageUrl = "https://www.automatetheplanet.com/wp-content/uploads/2015/06/Test-URL-Redirects-WebDriver.jpg";
 
     // 이미지 업로드
     const uploadFB = async (e) => {
@@ -49,16 +51,16 @@ const Add = () => {
     }
     // 추가하기 액션
     const add = () => {
-        dispatch(addMagazineFB({
-        title : titleInput.current.value,
-        imageUrl : file_link_ref.current.url,
+        dispatch(addMagazineFB(
+        title,
+        imageUrl,
         shopUrl,
         content,
-        price : price.current.value,
-        category,
-        date : new Date().toLocaleString(),
-        name : "null"
-    }))
+        price,
+        category
+        // date : new Date().toLocaleString(),
+        // name : "null"
+    ))
     console.log(add);
     history.push('/');
     }
@@ -67,7 +69,7 @@ const Add = () => {
             <div className="add_title" >게시글 작성</div>
             <div className="Title_input">
                     <input type="text" placeholder="제목을 입력해주세요" 
-                    ref={titleInput}/>
+                    onChange={(e) => { setTitle(e.target.value);}}/>
                     {/* 드롭박스 */}
                     <select value={category}
                     onChange={(e) => { setCategory(e.target.value);}}> 
@@ -107,11 +109,11 @@ const Add = () => {
                     {/* 미리보기 밑 박스 */}
                 <div className="Link_input">
                     <input type="text" placeholder="구매처 링크를 적어주세요"
-                    onChange={(e) => { setShopUrl(e.target.value);}}/>
+                    onChange={(e) => {setShopUrl(e.target.value);}}/>
                 </div>                
                 <div className="Link_input">
                     <input type="text" placeholder="가격을 적어주세요" 
-                    ref={price}/>
+                    onChange={(e) => {setPrice(e.target.value);}}/>
                 </div>                
             </div>
             <div className='Write_container'>

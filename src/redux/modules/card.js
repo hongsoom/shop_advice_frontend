@@ -1,4 +1,5 @@
 import instance from "../../shared/Request";
+
 // 게시글 관련 CRUD
 
 // Actions
@@ -15,9 +16,9 @@ const initialState = {
         shopUrl: "",
         content: "",
         price: "",
-        category: "",
-        date : new Date().toLocaleString(),
-        name : ""
+        category: ""
+        // date : new Date().toLocaleString(),
+        // name : ""
     }],
     // magazine : [ {
     //     title : "이 바지를 사고 싶어요",
@@ -61,31 +62,34 @@ export function addMagazine(magazine) {
 // }
 
 // axios
-export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category ) => {
-    console.log(title, imageUrl)
-      return async function (dispatch, getState, { history }) {
+export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
+    console.log(title, imageUrl, shopUrl, content, price, category)
+    return async function (dispatch, getState ) {
         const _article = await instance
         .post("/api/article", {
-            title : title,
-            imageUrld : imageUrl,
-        })
-        .then((response) => {
-          console.log(response)
-  
-          const token = response.data.token
-          localStorage.setItem("token", token)
-  
-          console.log(token)
-  
-          history.push("/");
+            title : title ,
+            imageUrl : imageUrl,
+            shopUrl : shopUrl,
+            content :content,
+            price : price,
+            category : category,}
+        ).then((response) => {
+            console.log(response)
+            // const magazine_data = {_article};
+            // dispatch(addMagazine(_article))
+            dispatch(addMagazine(title, imageUrl, shopUrl, content, price, category))
+            
+            const message = response.data.message;
+            window.alert(message);
         })
         .catch((error) => {
-          console.log(error)
-          const err_message = error.response.data.errorMessage;
-          window.alert(err_message)
+            console.log(error)
+            const err_message = error.response.data.errorMessage;
+            window.alert(err_message)
         })
-      }
-  }
+}
+}
+
 
 
 
@@ -113,6 +117,7 @@ export default function reducer(state = initialState, action = {}) {
         case "magazines/ADD": {
             const new_magazine_list = [...state.magazine, action.magazine];
             return { magazine: new_magazine_list };
+            // return state;
         }
 
         // case "magazines/MODIFY": {

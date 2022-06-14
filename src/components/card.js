@@ -11,7 +11,7 @@ const Card = (props) => {
     const dispatch = useDispatch();
     // 잘가져왔는지 확인
     const data = useSelector((state) => state.card.magazine);
-    console.log(data);
+    // console.log(data);
 
     React.useEffect(() => {
         dispatch(loadMagazine()) ;
