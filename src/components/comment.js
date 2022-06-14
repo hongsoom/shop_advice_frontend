@@ -5,18 +5,18 @@ import { addCommentFB, editCommentFB, deleteCommentFB } from "../redux/modules/c
 import profile from "../assets/profile.png";
 import "../css/comment.css";
 
-const Comment = () => {
-
+const Comment = ({articleId}) => {
+    console.log(articleId)
     const dispatch = useDispatch();
 
     const [comment, setcomment] = React.useState("");
 
     const addcomment = () => {
         dispatch(addCommentFB(
-            comment 
+            articleId, comment 
         ))
     }
-
+    
     return (
         <div className="comment_container">
             <div className="comment_add">

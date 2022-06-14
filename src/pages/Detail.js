@@ -1,10 +1,14 @@
 import React from "react";
+import { useHistory, useParams } from 'react-router-dom';
 import Comment from "../components/comment";
 import test from "../assets/test.png";
 import profile from "../assets/profile.png";
 import "../css/Detail.css";
 
-const Detail = () => {
+const Detail = (props) => {
+
+    const articleId = useParams().id;
+
     return (
         <div className="Detail_container">
             <div className="Detail_content">
@@ -28,7 +32,7 @@ const Detail = () => {
                     <p className="content">Set sail with the most exclusive internet yacht club! The clubhouse offices are open from 6 am -9 pm with the exception of Monday - Sunday.  Only club members are allowed to use the pool noodles and motorboating is strongly encouraged. For more detailed information please try back later.</p>
                 </div>
             </div> 
-            <Comment />
+            <Comment articleId={articleId}/>
         </div>
     )
 }

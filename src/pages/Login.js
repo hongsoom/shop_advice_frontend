@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux"; 
-import { LoginFB } from "../redux/modules/user";
+import { LoginFB, logincheckFB } from "../redux/modules/user";
 import "../css/Login.css";
 import LoginImage from "../assets/main.png";
 
@@ -14,7 +14,8 @@ const Login = () => {
     const login = () => {
         dispatch(LoginFB(
             userId, password
-        )) 
+        ))
+        dispatch(logincheckFB())
     }
 
     return (

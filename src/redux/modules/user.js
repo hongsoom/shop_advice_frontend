@@ -1,25 +1,22 @@
 import instance from "../../shared/Request";
 
 const LOG_IN = 'user/LOG_IN';
-const SING_UP = 'user/SING_UP';
+const LOGIN_CHECK = 'user/LOGIN_CHECK';
 const LOG_OUT = 'user/LOG_OUT';
 
 const initialState = {
-    user : [{
-      userId : "",
-      nickname : "",
-      password : "",
-      passwordCheck : ""
-    }] ,
+    userId : null,
+    nickname : null,
+    password : null,
     is_login: false,
 };
 
 export const Login = (user) => {
-    return { type: LOG_IN, user };
+    return { type: LOG_IN, user};
 };
 
-export const Singup = (user) => {
-    return { type: SING_UP, user };
+export const Logincheck = (userId, nickname) => {
+    return { type: LOGIN_CHECK, userId, nickname };
 };
 
 export const Logout = (user) => {
@@ -39,7 +36,6 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
         })
         .then((response) => {
             console.log(response)
-            dispatch(Singup(userId, nickname, password))
 
             const message = response.data.message
             window.alert(message);
@@ -68,8 +64,10 @@ export const LoginFB = (userId, password) => {
         const token = response.data.token
         localStorage.setItem("token", token)
 
+        dispatch(Login());
+
         history.push("/");
-        dispatch(Login(token))
+
       })
       .catch((error) => {
         console.log(error)
@@ -84,13 +82,12 @@ export const logincheckFB = () => {
         const _logincheck = await instance
         .get("/api/user/me")
         .then((response) => {
-           console.log(response);
+          console.log(response);
 
            localStorage.setItem("loginUserId", response.data.userInfo.userId)
-           localStorage.setItem("loginUserName", response.data.userInfo.nickname)  
+           localStorage.setItem("loginUserName", response.data.userInfo.nickname)
 
-           dispatch(Login(response.data.userInfo.userId, response.data.userInfo.nickname))
-
+           dispatch(Logincheck(response.data.userInfo.userId, response.data.userInfo.nickname));
           })
           .catch((error) => {
             console.error(error)
@@ -139,6 +136,8 @@ export const idCheckFB = (userId) => {
 export const LogoutFB = () => {
     return function(dispatch) {
         localStorage.removeItem("loginUserId");
+        localStorage.removeItem("loginUserName");
+        localStorage.removeItem("token");
         dispatch(Logout())
     }
   }
@@ -146,13 +145,14 @@ export const LogoutFB = () => {
   export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
       case "user/LOG_IN":
-        return {is_login: true};
+        return {is_login: true}
   
-      case "user/SING_UP": 
-        return null;
+      case "user/LOGIN_CHECK": 
+        console.log(action.userId, action.nickname)
+        return {userId : action.userId, nickname : action.nickname}; 
 
       case "user/LOG_OUT":
-        return {is_login: false};
+        return {is_login: false}
 
       default:
         return state;
