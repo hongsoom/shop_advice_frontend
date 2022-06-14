@@ -5,10 +5,9 @@ const LOGIN_CHECK = 'user/LOGIN_CHECK';
 const LOG_OUT = 'user/LOG_OUT';
 
 const initialState = {
-    userId : null,
-    nickname : null,
-    password : null,
-    is_login: false,
+  userId : null,
+  nickname : null,
+  is_login : false,
 };
 
 export const Login = (user) => {
@@ -61,22 +60,29 @@ export const LoginFB = (userId, password) => {
       .then((response) => {
         console.log(response)
 
-        const token = response.data.token
-        localStorage.setItem("token", token)
+        localStorage.setItem("token", response.data.token)
+        const token = localStorage.getItem("token");
+        console.log(token);
 
-        dispatch(Login());
-
-        history.push("/");
-
-      })
+        instance
+        .get("/api/user/me")
+        .then((response) => {
+          console.log(response);
+          
+          const userId = response.data.userInfo.userId
+          localStorage.setItem("nickname", response.data.userInfo.nickname)
+          dispatch(Login())
+          history.push("/");
+    })})
       .catch((error) => {
         console.log(error)
         const err_message = error.response.data.errorMessage;
         window.alert(err_message)
       })
     }
-}
+  }
 
+/* 
 export const logincheckFB = () => {
     return async function(dispatch) {
         const _logincheck = await instance
@@ -93,8 +99,8 @@ export const logincheckFB = () => {
             console.error(error)
           })
     }
-  }
-
+  } 
+ */
 export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {
@@ -145,14 +151,13 @@ export const LogoutFB = () => {
   export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
       case "user/LOG_IN":
-        return {is_login: true}
+        return {is_login : true};
   
       case "user/LOGIN_CHECK": 
-        console.log(action.userId, action.nickname)
-        return {userId : action.userId, nickname : action.nickname}; 
+        return { userId : action.userId, nickname: action.nickname }; 
 
       case "user/LOG_OUT":
-        return {is_login: false}
+        return {is_login : false};
 
       default:
         return state;

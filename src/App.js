@@ -12,16 +12,11 @@ import Login from "./pages/Login";
 
 function App() {
 
-  const dispatch = useDispatch();
-
-  const is_session = localStorage.getItem("token") ? true : false
-  const is_login = useSelector((state) => state.user.is_login)
+/*   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if(is_session) {
-    dispatch(logincheckFB())
-    }
-  }, [is_login]);
+      dispatch(logincheckFB())
+    }, []); */
 
   return (
     <div className="App">
