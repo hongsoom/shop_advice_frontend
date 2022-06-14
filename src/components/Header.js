@@ -23,7 +23,6 @@ const Header = (props) => {
         dispatch(LogoutFB())
     }
 
-    if(cookie === "success" && token) {
     return (
         <div className="Header-container">
             <div className="Header-content">
@@ -45,6 +44,5 @@ const Header = (props) => {
         </div>
         );
     }
-};
 
 export default Header;
