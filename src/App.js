@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
+import { useDispatch } from "react-redux"; 
+import { logincheckFB } from "./redux/modules/user";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
@@ -10,6 +11,13 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+/*   React.useEffect(() => {
+    dispatch(logincheckFB());
+  }, [dispatch]);
+ */
   return (
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */}      

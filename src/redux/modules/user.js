@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "../../shared/Request";
 
 const LOG_IN = 'user/LOG_IN';
 const SING_UP = 'user/SING_UP';
@@ -30,8 +30,8 @@ export const Logout = (user) => {
 export const SignupFB = (userId, nickname ,password, passwordCheck) => {
   console.log(userId, nickname, password, passwordCheck)
     return async function (dispatch, getState, {history}) {
-      const _signup = await axios
-        .post("http://3.34.42.87:3000/api/user/signup", {
+      const _signup = await instance
+        .post("/api/user/signup", {
           userId: userId,
           nickname: nickname,
           password: password,
@@ -47,6 +47,7 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
             history.push("/Login");
         })
         .catch((error) => {
+          console.log(error)
           const err_message = error.response.data.errorMessage;
           window.alert(err_message)
         })
@@ -56,8 +57,8 @@ export const SignupFB = (userId, nickname ,password, passwordCheck) => {
 export const LoginFB = (userId, password) => {
   console.log(userId, password)
     return async function (dispatch, getState, { history }) {
-      const _login = await axios
-      .post("http://3.34.42.87:3000/api/user/login", {
+      const _login = await instance
+      .post("/api/user/login", {
         userId : userId,
         password : password,
       })
@@ -72,6 +73,7 @@ export const LoginFB = (userId, password) => {
         history.push("/");
       })
       .catch((error) => {
+        console.log(error)
         const err_message = error.response.data.errorMessage;
         window.alert(err_message)
       })
@@ -80,8 +82,8 @@ export const LoginFB = (userId, password) => {
 
 export const logincheckFB = () => {
     return async function(dispatch) {
-        const _logincheck = await axios
-        .get("http://3.34.42.87:3000/api/user/me") 
+        const _logincheck = await instance
+        .get("/api/user/me")
         .then((response) => {
            console.log(response);
 
@@ -89,6 +91,8 @@ export const logincheckFB = () => {
            localStorage.setItem("loginUserName", response.data.userInfo.nickname)  
 
            dispatch(Login(response.data.userInfo.userId, response.data.userInfo.nickname))
+
+           
 
           })
           .catch((error) => {
@@ -100,10 +104,8 @@ export const logincheckFB = () => {
 export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {
-      const _idCheck = await axios
-        .get("http://3.34.42.87:3000/api/user/dup_userId", {
-           userId : userId,
-          })
+      const _idCheck = await instance
+        .get(`/api/user/dup_userId/${userId}`)
         .then((response) => {
           console.log(response);
 
@@ -111,6 +113,7 @@ export const idCheckFB = (userId) => {
           window.alert(message);
         })
         .catch((error) => {
+          console.error(error)
           const error_message = error.response.data.errorMessage; 
           window.alert(error_message)
         })
@@ -120,10 +123,8 @@ export const idCheckFB = (userId) => {
   export const nicknameCheckFB = (nickname) => {
     console.log(nickname)
     return async function () {
-      const _nicknameCheck= await axios
-        .get("http://3.34.42.87:3000/api/user/dup_nickname", { 
-          nickname : nickname,
-        })
+      const _nicknameCheck = await instance
+        .get(`/api/user/dup_nickname/${nickname}`)
         .then((response) => {
           console.log(response);
 
@@ -131,6 +132,7 @@ export const idCheckFB = (userId) => {
           window.alert(message);
         })
         .catch((error) => {
+          console.error(error)
           const error_message = error.response.data.errorMessage;
             window.alert(error_message)
         })
@@ -139,7 +141,7 @@ export const idCheckFB = (userId) => {
 
 export const LogoutFB = () => {
     return function(dispatch) {
-        localStorage.removeItem("loginUserIdgit");
+        localStorage.removeItem("loginUserId");
         dispatch(Logout())
     }
   }
