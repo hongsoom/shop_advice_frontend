@@ -33,6 +33,10 @@
     margin: 0 100px 0 0;
 }
 
+.Logout_btn2 {
+    margin: 0 100px 0 0;
+}
+
 @media screen and (min-width : 350px) and (max-width : 850px) {
     .Singup_btn2 {
         margin: 0 50px 0 0;

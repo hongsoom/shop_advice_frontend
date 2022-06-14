@@ -1,13 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux"; 
+import { addCommentFB, editCommentFB, deleteCommentFB } from "../redux/modules/comment";
+
 import profile from "../assets/profile.png";
 import "../css/comment.css";
 
-const comment = () => {
+const Comment = () => {
+
+    const dispatch = useDispatch();
+
+    const [comment, setcomment] = React.useState("");
+
+    const addcomment = () => {
+        dispatch(addCommentFB(
+            comment 
+        ))
+    }
+
     return (
         <div className="comment_container">
             <div className="comment_add">
-                <input placeholder="댓글을 작성해 주세요"></input>
-                <button>작성하기</button>
+                <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setcomment(e.target.value)}></input>
+                <button onClick={addcomment}>작성하기</button>
             </div>
             <div className="comment">
                 <div className="comment_profile">
@@ -26,4 +40,4 @@ const comment = () => {
     )
 }
 
-export default comment;
+export default Comment;

@@ -68,9 +68,8 @@ export const LoginFB = (userId, password) => {
         const token = response.data.token
         localStorage.setItem("token", token)
 
-        console.log(token)
-
         history.push("/");
+        dispatch(Login(token))
       })
       .catch((error) => {
         console.log(error)
@@ -91,8 +90,6 @@ export const logincheckFB = () => {
            localStorage.setItem("loginUserName", response.data.userInfo.nickname)  
 
            dispatch(Login(response.data.userInfo.userId, response.data.userInfo.nickname))
-
-           
 
           })
           .catch((error) => {
@@ -149,18 +146,13 @@ export const LogoutFB = () => {
   export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
       case "user/LOG_IN":
-        state.user = { ...action.user }
-        console.log(state.user)
-        state.is_login = true;
-        return state;
+        return {is_login: true};
   
       case "user/SING_UP": 
         return null;
 
       case "user/LOG_OUT":
-        state.user = {};
-        state.is_login = false;
-        return state;
+        return {is_login: false};
 
       default:
         return state;

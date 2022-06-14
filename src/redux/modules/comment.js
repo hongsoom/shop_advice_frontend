@@ -1,21 +1,21 @@
-import axios from "axios";
+import instance from "../../shared/Request";
 
-const SET_COMMENT = 'comment/SET_COMMENT';
+const LOAD_COMMENT = 'comment/LOAD_COMMENT';
 const ADD_COMMENT = 'comment/ADD_COMMENT';
 const EDIT_COMMENT  = 'comment/EDIT_COMMENT';
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 
 const initialState = {
-    list : [{
+    comment : [{
     }] 
 };
 
-export const setComment = (user) => {
-    return { type: SET_COMMENT, user };
+export const loadComment = (comment_list) => {
+    return { type: LOAD_COMMENT, comment_list };
 };
 
-export const addComment = (user) => {
-    return { type: ADD_COMMENT, user };
+export const addComment = (comment) => {
+    return { type: ADD_COMMENT, comment };
 };
 
 export const editComment = (user) => {
@@ -29,55 +29,111 @@ export const deleteComment  = (user) => {
 // middlewares
 export const loadCommentFB = () => {
     return async function (dispatch) {
-  
+      const _loadcomment = await instance
+      .get("/api/comment/${articleId}")
+      .then((response) => {
+        console.log(response)
 
+        const comment_list = [];
+
+        dispatch(loadComment(comment_list))
+      })
+      .catch((error) => {
+        console.log(error)
+        const err_message = error.response.data.errorMessage;
+        window.alert(err_message)
+      })
     }
   }
   
-  export const addCommentFB = (magazine) => {
-    return async function (dispatch) {
+  export const addCommentFB = (comment) => {
+      return async function (dispatch) {
+        const _addcomment = await instance
+        .post("/api/comment/${articleId}", {
+          comment : comment,
+        })
+        .then((response) => {
+          console.log(response)
 
-  
+          const message = response.data.message
+          window.alert(message);
 
+          dispatch(addComment(comment))
+        })
+        .catch((error) => {
+          console.log(error)
+          const err_message = error.response.data.errorMessage;
+          window.alert(err_message)
+        })
     }
   }
   
-  export const editCommentFB = (magazine, magazine_id) => {
+  export const editCommentFB = () => {
     return async function(dispatch,getState) {
+      const _editcomment = await instance
+      .put("/api/comment/${commentId}", {
 
-  
-    }
+      })
+      .then((response) => {
+        console.log(response)
+
+        const message = response.data.message
+        window.alert(message);
+
+        dispatch(editComment())
+      })
+      .catch((error) => {
+        console.log(error)
+        const err_message = error.response.data.errorMessage;
+        window.alert(err_message)
+    })
   }
+}
   
-  export const deleteCommentFB = (magazine_id) => {
+export const deleteCommentFB = (magazine_id) => {
     return async function(dispatch, getState) {
+      const _deletecomment = await instance
+      .delete("/api/comment/${commentId}", {
 
+      })
+      .then((response) => {
+        console.log(response)
 
-    }
+        const message = response.data.message
+        window.alert(message);
+
+        dispatch(deleteComment())
+      })
+      .catch((error) => {
+        console.log(error)
+        const err_message = error.response.data.errorMessage;
+        window.alert(err_message)
+    })
   }
+}
   
-  // reducer
-  export default function reducer(state = initialState, action = {}) {
+// reducer
+export default function reducer(state = initialState, action = {}) {
       switch (action.type) {
-        case "comment/SET_COMMENT":
-          return {magazine : action.magazine_list};
+        case "comment/LOAD_COMMENT":
+          return {comment : action.comment_list};
     
         case "comment/ADD_COMMENT": {
-          const new_magazine_list = [...state.magazine, action.magazine];
-          return { magazine: new_magazine_list };
+          const new_comment_list = [...state.list, action.comment];
+          return { comment: new_comment_list };
         }
   
         case "comment/EDIT_COMMENT": {
-          const new_magazine_list = state.magazine.map((a, idx) => 
-            parseInt(action.magazine_index) === idx ? { ...a, ...action.magazine } : a);
-          return { ...state, magazine: new_magazine_list };
+          const new_comment_list = state.comment.map((a, idx) => 
+            parseInt(action.comment_index) === idx ? { ...a, ...action.comment } : a);
+          return { ...state, comment: new_comment_list };
         }
   
         case "comment/DELETE_COMMENT": {
-        const new_magazine_list = state.magazine.filter((l, idx) => {
-          return parseInt(action.magazine_index) !== idx;
+        const new_comment_list = state.comment.filter((l, idx) => {
+          return parseInt(action.comment_index) !== idx;
         });
-        return {magazine: new_magazine_list};
+        return { comment: new_comment_list};
       }
         default:
           return state;
