@@ -15,7 +15,6 @@ const Login = () => {
         dispatch(LoginFB(
             userId, password
         ))
-        dispatch(logincheckFB())
     }
 
     return (

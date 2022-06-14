@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router"
 import thunk from "redux-thunk";
 import card from "./modules/card";
 import user from "./modules/user";
+import comment from "./modules/comment";
 
 export const history = createBrowserHistory()
 
@@ -16,6 +17,7 @@ const enhancer = applyMiddleware(...middlewares);
 const rootReducer = combineReducers({ 
     card : card,
     user : user,
+    comment : comment,
     router: connectRouter(history),
 });
 

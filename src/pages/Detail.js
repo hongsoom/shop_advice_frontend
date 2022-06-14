@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Comment from "../components/comment";
 import test from "../assets/test.png";
 import profile from "../assets/profile.png";

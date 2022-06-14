@@ -5,20 +5,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { LogoutFB } from "../redux/modules/user";
+import { getCookie } from "../shared/Cookie";
 
-const Header = () => {
+const Header = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     const is_login = useSelector((state) => state.user.is_login);
-    const nickname = useSelector((state) => state.user.nickname);
-    console.log(is_login, nickname)
+    console.log(is_login)
+
+    const cookie = getCookie("is_login");
+    const token = localStorage.getItem("token")
+    const nickname = localStorage.getItem("nickname")
 
     const Logout = () => {
         dispatch(LogoutFB())
     }
 
+    if(cookie === "success" && token) {
     return (
         <div className="Header-container">
             <div className="Header-content">
@@ -38,7 +43,8 @@ const Header = () => {
                ) }
             </div>
         </div>
-    );
+        );
+    }
 };
 
 export default Header;

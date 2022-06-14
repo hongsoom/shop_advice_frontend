@@ -6,12 +6,11 @@ const EDIT_COMMENT  = 'comment/EDIT_COMMENT';
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 
 const initialState = {
-    comment : [{
-    }] 
+  comments : [],
 };
 
 export const loadComment = (comment_list) => {
-    return { type: LOAD_COMMENT, comment_list };
+    return { type: LOAD_COMMENT, comment_list};
 };
 
 export const addComment = (comment) => {
@@ -33,8 +32,9 @@ export const loadCommentFB = (articleId) => {
       .get(`/api/comment/${articleId}`)
       .then((response) => {
         console.log(response)
-
-        const comment_list = [];
+        
+        const comment_list = response.data.comments
+        console.log(comment_list)
 
         dispatch(loadComment(comment_list))
       })
@@ -68,7 +68,7 @@ export const loadCommentFB = (articleId) => {
     }
   }
   
-  export const editCommentFB = (commentId) => {
+export const editCommentFB = (commentId) => {
     return async function(dispatch,getState) {
       const _editcomment = await instance
       .put(`/api/comment/${commentId}`, {
@@ -114,14 +114,15 @@ export const deleteCommentFB = (commentId) => {
 export default function reducer(state = initialState, action = {}) {
       switch (action.type) {
         case "comment/LOAD_COMMENT":
-          return {comment : action.comment_list};
+          console.log(action.comment_list)
+          return {comments : action.comment_list};
     
         case "comment/ADD_COMMENT": {
-          const new_comment_list = [...state.comment, action.comment];
-          return { comment: new_comment_list };
+          const new_comment_list = [...state.comments, action.comment];
+          return { comments: new_comment_list };
         }
   
-        case "comment/EDIT_COMMENT": {
+/*         case "comment/EDIT_COMMENT": {
           const new_comment_list = state.comment.map((a, idx) => 
             parseInt(action.comment_index) === idx ? { ...a, ...action.comment } : a);
           return { ...state, comment: new_comment_list };
@@ -132,7 +133,7 @@ export default function reducer(state = initialState, action = {}) {
           return parseInt(action.comment_index) !== idx;
         });
         return { comment: new_comment_list};
-      }
+      } */
         default:
           return state;
       }
