@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux"; 
+import { useSelector, useDispatch } from "react-redux"; 
 import { logincheckFB } from "./redux/modules/user";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -14,10 +14,15 @@ function App() {
 
   const dispatch = useDispatch();
 
-/*   React.useEffect(() => {
-    dispatch(logincheckFB());
-  }, [dispatch]);
- */
+  const is_session = localStorage.getItem("token") ? true : false
+  const is_login = useSelector((state) => state.user.is_login)
+
+  React.useEffect(() => {
+    if(is_session) {
+    dispatch(logincheckFB())
+    }
+  }, [is_login]);
+
   return (
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */}      

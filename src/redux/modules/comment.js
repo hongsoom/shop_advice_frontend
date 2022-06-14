@@ -27,10 +27,10 @@ export const deleteComment  = (user) => {
 };
 
 // middlewares
-export const loadCommentFB = () => {
+export const loadCommentFB = (articleId) => {
     return async function (dispatch) {
       const _loadcomment = await instance
-      .get("/api/comment/${articleId}")
+      .get(`/api/comment/${articleId}`)
       .then((response) => {
         console.log(response)
 
@@ -46,10 +46,10 @@ export const loadCommentFB = () => {
     }
   }
   
-  export const addCommentFB = (comment) => {
+  export const addCommentFB = (articleId, comment) => {
       return async function (dispatch) {
         const _addcomment = await instance
-        .post("/api/comment/${articleId}", {
+        .post(`/api/comment/${articleId}`, {
           comment : comment,
         })
         .then((response) => {
@@ -68,10 +68,10 @@ export const loadCommentFB = () => {
     }
   }
   
-  export const editCommentFB = () => {
+  export const editCommentFB = (commentId) => {
     return async function(dispatch,getState) {
       const _editcomment = await instance
-      .put("/api/comment/${commentId}", {
+      .put(`/api/comment/${commentId}`, {
 
       })
       .then((response) => {
@@ -90,12 +90,10 @@ export const loadCommentFB = () => {
   }
 }
   
-export const deleteCommentFB = (magazine_id) => {
+export const deleteCommentFB = (commentId) => {
     return async function(dispatch, getState) {
       const _deletecomment = await instance
-      .delete("/api/comment/${commentId}", {
-
-      })
+      .delete(`/api/comment/${commentId}`)
       .then((response) => {
         console.log(response)
 
@@ -119,7 +117,7 @@ export default function reducer(state = initialState, action = {}) {
           return {comment : action.comment_list};
     
         case "comment/ADD_COMMENT": {
-          const new_comment_list = [...state.list, action.comment];
+          const new_comment_list = [...state.comment, action.comment];
           return { comment: new_comment_list };
         }
   
