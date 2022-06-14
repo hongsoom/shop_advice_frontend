@@ -4,7 +4,7 @@ import "../css/Add.css";
 import { useHistory } from 'react-router-dom';
 import { useRef, useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
-import { addMagazine } from "../redux/modules/card";
+import { addMagazineFB } from "../redux/modules/card";
 
 const Add = () => {
     const history = useHistory();
@@ -25,11 +25,9 @@ const Add = () => {
 
     // 이미지 업로드
     const uploadFB = async (e) => {
-
         // const uploded_file = await uploadBytes(ref(storage, `images/${e.target.files[0].name}`),
         // e.target.files[0]
         // );
-
         const reader = new FileReader();
         const file =  e.target.files[0];
         
@@ -42,7 +40,6 @@ const Add = () => {
         }
         console.log(file_link_ref.current);
         // const file_url = await getDownloadURL(uploded_file.ref);
-
         // file_link_ref.current = { url : file_url };
     }
     const onClickuploadFB = async () => {
@@ -52,20 +49,19 @@ const Add = () => {
     }
     // 추가하기 액션
     const add = () => {
-        dispatch(addMagazine({
-        title: titleInput.current.value,
-        content,
+        dispatch(addMagazineFB({
+        title : titleInput.current.value,
         imageUrl : file_link_ref.current.url,
         shopUrl,
-        date : new Date().toLocaleString(),
-        name,
+        content,
         price : price.current.value,
-        category
+        category,
+        date : new Date().toLocaleString(),
+        name : "null"
     }))
     console.log(add);
     history.push('/');
     }
-
     return (
         <div className="Add">
             <div className="add_title" >게시글 작성</div>
@@ -76,8 +72,8 @@ const Add = () => {
                     <select value={category}
                     onChange={(e) => { setCategory(e.target.value);}}> 
                         <option value="">카테고리▼</option>
-                        <option value="M">남성복</option>
-                        <option value="F">여성복</option>
+                        <option value="남성복">남성복</option>
+                        <option value="여성복">여성복</option>
                     </select> 
             </div>
             <div className="Add_input">

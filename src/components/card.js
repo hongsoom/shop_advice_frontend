@@ -28,7 +28,7 @@ const Card = (props) => {
                         <p>{list.title}</p>
                     </div>
                 );
-            })};
+            })}
         </div>
     );
 };
