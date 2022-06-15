@@ -1,8 +1,18 @@
 import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import "../css/Edit.css";
 import TestImage from "../assets/test.png";
 
 const Edit = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const articleId = useParams().articleId;
+    const index  = useParams().index;
+
+
+
     return (
         <div className="Edit">
             <div className="add_title">게시글 수정</div>

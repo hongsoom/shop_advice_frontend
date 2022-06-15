@@ -17,12 +17,13 @@ const Detail = () => {
 
     const articleId = useParams().articleId;
     const index  = useParams().index;
+
     //삭제
-    const delete_article = () => {
+    const deletearticle = () => {
         dispatch(delArticleFB(
             articleId
         ))
-        history.push('/');
+        console.log('삭제구현중')
     }
     // 게시 시간 보여주기
     const iso = data[index].createdAt;
@@ -40,7 +41,7 @@ const Detail = () => {
                     {nickname === data[index].nickname ? (
                             <div className='nickbtn'>
                             <button onClick={() => history.push("/Edit/" + index + "/" + `${data[index].articleId}`)}>수정</button>
-                            <button onClick={delete_article}>삭제</button>
+                            <button onClick={deletearticle}>삭제</button>
                             </div>
                         ) : null }
                     <div className="Detail_poto">    

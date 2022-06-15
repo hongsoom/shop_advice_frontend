@@ -49,10 +49,12 @@ export const loadMagazineFB  = () => {
 
 export const delArticleFB = (articleId) => {
     return async (dispatch, getState, { history }) => {
-        await apis.del()
+        await apis.del(articleId)
         .then((response) => {console.log(response);
+            dispatch(deleteArticle(articleId));
             const message = response.data.message;
             window.alert(message);
+            history.push('/');
         }).catch((error) => {console.error(error)})
 };}
 
@@ -103,8 +105,9 @@ export default function reducer(state = initialState, action = {}) {
         //         parseInt(action.magazine_index) === idx ? { ...a, ...action.magazine } : a);
         //     return { ...state, magazine: new_magazine_list };
         // }
-
+        
         case "article/DELETE": {
+            console.log('삭제');
             const new_articles_list = state.magazine.filter((l, idx) => {
             return parseInt(action.articles_id) !== idx;
             });
