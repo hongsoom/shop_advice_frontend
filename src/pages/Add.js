@@ -26,25 +26,25 @@ const Add = () => {
     //서버 확인 중
     const uploadFB = e => {
         setImageUrl(e.target.files[0]);
-      };
-      const onSubmit = e => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("image", imageUrl);
-        console.log(imageUrl)
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-        axios
-          .post("/api/image", formData, config)
-          .then(res => {
-            const { filePath } = res.data;
-            console.log(filePath);
-            setUploadedImg({ filePath });
-            alert("The file is successfully uploaded");
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      };
+    };
+    const onSubmit = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", imageUrl);
+    console.log(imageUrl)
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+    axios
+        .post("/api/image", formData, config)
+        .then(res => {
+        const { filePath } = res.data;
+        console.log(filePath);
+        setUploadedImg({ filePath });
+        alert("The file is successfully uploaded");
+        })
+        .catch(err => {
+        console.error(err);
+        });
+    };
 
     // 추가하기 액션
     const add = () => {
