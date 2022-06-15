@@ -24,9 +24,9 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/Detail" component={Detail} />
+        <Route exact path="/Detail/:index/:articleId" component={Detail} />
         <Route exact path="/Add" component={Add} />
-        <Route exact path="/Edit/:index/:id" component={Edit} />        
+        <Route exact path="/Edit/:index/:articleId" component={Edit} />        
         <Route exact path="/Signup" component={Signup} />
         <Route exact path="/Login" component={Login} />
       </Switch>
