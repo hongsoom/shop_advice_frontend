@@ -23,7 +23,6 @@ const Detail = () => {
         dispatch(delArticleFB(
             articleId
         ))
-        console.log('삭제구현중')
     }
     // 게시 시간 보여주기
     const iso = data[index].createdAt;
