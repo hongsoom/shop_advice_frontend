@@ -64,18 +64,8 @@ export const LoginFB = (userId, password) => {
         const token = localStorage.setItem("token");
         console.log(token);
 
-      instance
-        .get("/api/user/me", {
-          header :  { Authorization: "Bearer " + localStorage.getItem("token") },
-        })
-        .then((response) => {
-          console.log(response);
-          
-          localStorage.setItem("userId",response.data.userInfo.userId)
-          localStorage.setItem("nickname", response.data.userInfo.nickname)
+        history.push("/");
 
-          history.push("/");
-        })
       }).catch((error) => {
         console.log(error)
         const err_message = error.response.data.errorMessage;
@@ -84,7 +74,7 @@ export const LoginFB = (userId, password) => {
     }
   }
 
-/* export const logincheckFB = () => {
+export const logincheckFB = () => {
     return async function(dispatch) {
         const _logincheck = await instance
         .get("/api/user/me")
@@ -101,7 +91,7 @@ export const LoginFB = (userId, password) => {
           })
     }
   }
- */
+
 export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../assets/Logo.jpg';
 import '../css/Header.css';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { LogoutFB } from "../redux/modules/user";
