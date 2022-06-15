@@ -27,6 +27,7 @@ export const deleteComment  = (user) => {
 
 // middlewares
 export const loadCommentFB = (articleId) => {
+  console.log(articleId)
     return async function (dispatch) {
       const _loadcomment = await instance
       .get(`/api/comment/${articleId}`)
@@ -47,10 +48,11 @@ export const loadCommentFB = (articleId) => {
   }
   
   export const addCommentFB = (articleId, comment) => {
+    console.log(articleId, comment)
       return async function (dispatch) {
         const _addcomment = await instance
         .post(`/api/comment/${articleId}`, {
-          comment : comment,
+          comment : comment
         })
         .then((response) => {
           console.log(response)
