@@ -27,6 +27,7 @@ const Comment = ({articleId}) => {
                 <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
                 <button onClick={addcomment}>작성하기</button>
             </div>
+            <>
             {data.map((list, index) => {
                 return (
                 <div className="comment">
@@ -45,6 +46,7 @@ const Comment = ({articleId}) => {
                     </>
             </div>
                )})}
+            </>
         </div>
     )
 }
