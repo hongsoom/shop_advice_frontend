@@ -13,11 +13,14 @@ import Login from "./pages/Login";
 function App() {
 
 /*   const dispatch = useDispatch();
+  const localStoragetokenCheck = localStorage.getItem('token');
 
   React.useEffect(() => {
-      dispatch(logincheckFB())
-    }, []); */
-
+    if (localStoragetokenCheck) {
+      dispatch(logincheckFB());
+    }
+  }, []);
+ */
   return (
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */}      

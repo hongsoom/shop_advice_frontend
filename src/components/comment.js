@@ -28,12 +28,6 @@ const Comment = ({articleId}) => {
             comment 
         ))
     }
-
-    const deletecomment = () => {
-        dispatch(deleteCommentFB(
-
-        ))
-    } 
     
     return (
         <div className="comment_container">
@@ -54,7 +48,7 @@ const Comment = ({articleId}) => {
                     </div>
                     <div className="comment_user">
                         <span onClick={editcomment} className="material-symbols-outlined">edit</span>
-                        <span onClick={deletecomment} className="material-symbols-outlined">delete</span>
+                        <span onClick={() => dispatch(deleteCommentFB(list.commentId))} className="material-symbols-outlined">delete</span>
                     </div>
                     </>
             </div>
