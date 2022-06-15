@@ -8,31 +8,29 @@ const Comment = ({articleId}) => {
 
     const dispatch = useDispatch();
 
-    const [comment, setcomment] = React.useState("");
+    const [comment, setComment] = React.useState("");
 
     const data = useSelector((state) => state.comment.comments)
-    console.log(data)
 
     React.useEffect (() => {
-        dispatch(loadCommentFB());
-      }, []);
+        dispatch(loadCommentFB(articleId));
+      }, [data]);
 
     const addcomment = () => {
         dispatch(addCommentFB(
-            articleId, comment 
-        ))
+            articleId, comment)); 
     }
 
-    const editcomment = () => {
+/*     const editcomment = () => {
         dispatch(editCommentFB(
             comment 
         ))
-    }
+    } */
     
     return (
         <div className="comment_container">
             <div className="comment_add">
-                <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setcomment(e.target.value)}></input>
+                <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
                 <button onClick={addcomment}>작성하기</button>
             </div>
             {data.map((list, index) => {
@@ -47,7 +45,7 @@ const Comment = ({articleId}) => {
                         <p>{list.comment}</p>
                     </div>
                     <div className="comment_user">
-                        <span onClick={editcomment} className="material-symbols-outlined">edit</span>
+                        <span className="material-symbols-outlined">edit</span>
                         <span onClick={() => dispatch(deleteCommentFB(list.commentId))} className="material-symbols-outlined">delete</span>
                     </div>
                     </>
