@@ -35,7 +35,7 @@ const Login = () => {
                     <button onClick={login} className="Login_btn" disabled={userId === "" || password === "" ? true : false}>로그인</button>
 
                     <p>계정이 없으신가요? &nbsp;
-                        <a href={"/Singup"}>회원가입</a>
+                        <a href={"/Signup"}>회원가입</a>
                     </p>
                 </div>
             </div>

@@ -14,15 +14,15 @@ export const loadComment = (comment_list) => {
 };
 
 export const addComment = (comment) => {
-    return { type: ADD_COMMENT, comment };
+    return { type: ADD_COMMENT, comment};
 };
 
-export const editComment = (user) => {
-    return { type: EDIT_COMMENT, user };
+export const editComment = (commentId) => {
+    return { type: EDIT_COMMENT, commentId };
 };
 
-export const deleteComment  = (user) => {
-    return { type: DELETE_COMMENT, user };
+export const deleteComment  = (commentId) => {
+    return { type: DELETE_COMMENT, commentId };
 };
 
 // middlewares
@@ -53,6 +53,8 @@ export const loadCommentFB = (articleId) => {
         const _addcomment = await instance
         .post(`/api/comment/${articleId}`, {
           comment : comment
+        }, {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         })
         .then((response) => {
           console.log(response)
@@ -70,7 +72,7 @@ export const loadCommentFB = (articleId) => {
     }
   }
   
-export const editCommentFB = (commentId) => {
+/* export const editCommentFB = (commentId) => {
     return async function(dispatch,getState) {
       const _editcomment = await instance
       .put(`/api/comment/${commentId}`, {
@@ -90,19 +92,21 @@ export const editCommentFB = (commentId) => {
         window.alert(err_message)
     })
   }
-}
+} */
   
 export const deleteCommentFB = (commentId) => {
     return async function(dispatch, getState) {
       const _deletecomment = await instance
-      .delete(`/api/comment/${commentId}`)
+      .delete(`/api/comment/${commentId}`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+      })
       .then((response) => {
         console.log(response)
 
         const message = response.data.message
         window.alert(message);
 
-        dispatch(deleteComment())
+        dispatch(deleteComment(commentId))
       })
       .catch((error) => {
         console.log(error)
@@ -116,26 +120,25 @@ export const deleteCommentFB = (commentId) => {
 export default function reducer(state = initialState, action = {}) {
       switch (action.type) {
         case 'comment/LOAD_COMMENT':
-          console.log(action.comment_list)
-          return {comments : action.comment_list};
+          return { comments : action.comment_list };
     
         case 'comment/ADD_COMMENT': {
           const new_comment_list = [...state.comments, action.comment];
-          return { comments: new_comment_list };
+            return { comments :  new_comment_list };
         }
   
-/*         case "comment/EDIT_COMMENT": {
-          const new_comment_list = state.comment.map((a, idx) => 
+/*      case "comment/EDIT_COMMENT": {
+          const new_comment_list = state.comments.map((a, idx) => 
             parseInt(action.comment_index) === idx ? { ...a, ...action.comment } : a);
           return { ...state, comment: new_comment_list };
-        }
+        } */
   
-        case "comment/DELETE_COMMENT": {
-        const new_comment_list = state.comment.filter((l, idx) => {
-          return parseInt(action.comment_index) !== idx;
+        case 'comment/DELETE_COMMENT': {
+        const new_comment_list = state.comments.filter((l) => {
+          return parseInt(action.commentId) !== l.commentId;
         });
-        return { comment: new_comment_list};
-      } */
+        return { comments : new_comment_list};
+      } 
         default:
           return state;
       }
