@@ -65,6 +65,8 @@ export const LoginFB = (userId, password) => {
         localStorage.setItem("token", token);
         console.log(token)
 
+        dispatch(Login(token))
+
         instance
         .get("/api/user/me", {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -85,8 +87,6 @@ export const LoginFB = (userId, password) => {
           })
 
         history.push("/");
-
-        dispatch(Login(token))
 
       }).catch((error) => {
         console.log(error)
@@ -121,7 +121,9 @@ export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {
       const _idCheck = await instance
-        .get(`/api/user/dup_userId/${userId}`)
+        .post("/api/user/dup_userId", {
+          userId : userId
+        })
         .then((response) => {
           console.log(response);
 
@@ -140,7 +142,9 @@ export const idCheckFB = (userId) => {
     console.log(nickname)
     return async function () {
       const _nicknameCheck = await instance
-        .get(`/api/user/dup_nickname/${nickname}`)
+        .post("/api/user/dup_nickname", {
+          nickname : nickname
+        })
         .then((response) => {
           console.log(response);
 
