@@ -61,20 +61,22 @@ export const LoginFB = (userId, password) => {
         console.log(response)
 
         localStorage.setItem("token", response.data.token)
-        const token = localStorage.getItem("token");
+        const token = localStorage.setItem("token");
         console.log(token);
 
-        instance
-        .get("/api/user/me")
+      instance
+        .get("/api/user/me", {
+          header :  { Authorization: "Bearer " + localStorage.getItem("token") },
+        })
         .then((response) => {
           console.log(response);
           
-          const userId = response.data.userInfo.userId
+          localStorage.setItem("userId",response.data.userInfo.userId)
           localStorage.setItem("nickname", response.data.userInfo.nickname)
-          dispatch(Login())
+
           history.push("/");
-    })})
-      .catch((error) => {
+        })
+      }).catch((error) => {
         console.log(error)
         const err_message = error.response.data.errorMessage;
         window.alert(err_message)
@@ -82,16 +84,15 @@ export const LoginFB = (userId, password) => {
     }
   }
 
-/* 
-export const logincheckFB = () => {
+/* export const logincheckFB = () => {
     return async function(dispatch) {
         const _logincheck = await instance
         .get("/api/user/me")
         .then((response) => {
           console.log(response);
 
-           localStorage.setItem("loginUserId", response.data.userInfo.userId)
-           localStorage.setItem("loginUserName", response.data.userInfo.nickname)
+           localStorage.setItem("userId", response.data.userInfo.userId)
+           localStorage.setItem("nickname", response.data.userInfo.nickname)
 
            dispatch(Logincheck(response.data.userInfo.userId, response.data.userInfo.nickname));
           })
@@ -99,7 +100,7 @@ export const logincheckFB = () => {
             console.error(error)
           })
     }
-  } 
+  }
  */
 export const idCheckFB = (userId) => {
   console.log(userId)
@@ -141,8 +142,8 @@ export const idCheckFB = (userId) => {
 
 export const LogoutFB = () => {
     return function(dispatch) {
-        localStorage.removeItem("loginUserId");
-        localStorage.removeItem("loginUserName");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("nickname");
         localStorage.removeItem("token");
         dispatch(Logout())
     }
