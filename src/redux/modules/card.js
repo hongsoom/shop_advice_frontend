@@ -78,20 +78,21 @@ export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category
             content :content,
             price : price,
             category : category,}
-        ).then((response) => {
-            console.log(response)
-            // const magazine_data = {_article};
-            // dispatch(addMagazine(_article))
-            dispatch(addMagazine(title, imageUrl, shopUrl, content, price, category))
-            
-            const message = response.data.message;
-            window.alert(message);
-        })
-        .catch((error) => {
-            console.log(error)
-            const err_message = error.response.data.errorMessage;
-            window.alert(err_message)
-        })
+            )   
+            .then((response) => {
+                console.log(response)
+                // const magazine_data = {_article};
+                // dispatch(addMagazine(_article))
+                dispatch(addMagazine(title, imageUrl, shopUrl, content, price, category))
+                
+                const message = response.data.message;
+                window.alert(message);
+            })
+            .catch((error) => {
+                console.log(error)
+                const err_message = error.response.data.errorMessage;
+                window.alert(err_message)
+            })
 }
 }
 

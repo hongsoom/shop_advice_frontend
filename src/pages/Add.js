@@ -9,7 +9,7 @@ import axios from 'axios';
 const Add = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-  
+
     // const [imageName, setimageName ] = useState("");
     const [content, setContent] = useState("");
     const [shopUrl, setShopUrl] = useState("");
@@ -19,29 +19,29 @@ const Add = () => {
     // 미리보기
     // const [preview, setPreview ] = useState("");
     const [imageUrl, setImageUrl ] = useState("");
-    const [uploadedImg, setUploadedImg] = useState({
-        fillPath: ""
-    });
+    // const [uploadedImg, setUploadedImg] = useState({
+    //     fillPath: ""
+    // });
 
     //서버 확인 중
-    const uploadFB = e => {
+    const uploadFB = (e) => {
         setImageUrl(e.target.files[0]);
     };
-    const onSubmit = e => {
+    const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", imageUrl);
-    console.log(imageUrl)
+    console.log(formData)
     const config = { headers: { 'Content-Type': 'multipart/form-data' } }
     axios
         .post("/api/image", formData, config)
-        .then(res => {
-        const { filePath } = res.data;
-        console.log(filePath);
-        setUploadedImg({ filePath });
+        .then((res) => {
+        const imageUrl = res.data.imageUrl;
+        console.log(imageUrl);
+        
         alert("The file is successfully uploaded");
         })
-        .catch(err => {
+        .catch((err) => {
         console.error(err);
         });
     };
@@ -56,7 +56,7 @@ const Add = () => {
         price,
         category
     ))
-    console.log(imageUrl);
+    // console.log(imageUrl);
     history.push('/');
     }
     return (
@@ -85,7 +85,7 @@ const Add = () => {
             <div className="Add_container">
                     {/* 이미지 첨부 */}
                 <div className="Pre_input">
-                    <img src={uploadedImg.filePath} alt=''/>
+                    <img src={imageUrl} alt=''/>
                 </div>                
                 <div className="Pre_input">
                     <textarea 
