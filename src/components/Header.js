@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../assets/Logo.jpg';
 import '../css/Header.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { LogoutFB } from "../redux/modules/user";
@@ -11,14 +11,17 @@ const Header = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const nickname = localStorage.getItem("nickname")
-    const token = localStorage.getItem("token")
+    const nickname = localStorage.getItem("nickname");
+    const is_session = localStorage.getItem("token") ? true : false
+    const is_login = useSelector((state) => state.user.is_login);
+
+    console.log(is_session)
 
     const Logout = () => {
         dispatch(LogoutFB())
     }
 
-    if (token) {
+    if (is_login || is_session) {
     return (
         <div className="Header-container">
             <div className="Header-content">
@@ -30,7 +33,7 @@ const Header = (props) => {
             </div>
         </div>
         )
-    } else {
+    } 
         return (
             <div className="Header-container">
                 <div className="Header-content">
@@ -42,7 +45,7 @@ const Header = (props) => {
                 </div>
             </div>
         )    
-    }
+    
 }
 
 export default Header;

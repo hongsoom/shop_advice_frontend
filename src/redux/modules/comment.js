@@ -113,11 +113,11 @@ export const deleteCommentFB = (commentId) => {
 // reducer
 export default function reducer(state = initialState, action = {}) {
       switch (action.type) {
-        case "comment/LOAD_COMMENT":
+        case 'comment/LOAD_COMMENT':
           console.log(action.comment_list)
           return {comments : action.comment_list};
     
-        case "comment/ADD_COMMENT": {
+        case 'comment/ADD_COMMENT': {
           const new_comment_list = [...state.comments, action.comment];
           return { comments: new_comment_list };
         }
