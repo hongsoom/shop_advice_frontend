@@ -15,8 +15,6 @@ const Header = (props) => {
     const is_session = localStorage.getItem("token") ? true : false
     const is_login = useSelector((state) => state.user.is_login);
 
-    console.log(is_session)
-
     const Logout = () => {
         dispatch(LogoutFB())
     }
@@ -33,7 +31,7 @@ const Header = (props) => {
             </div>
         </div>
         )
-    } 
+    } else {
         return (
             <div className="Header-container">
                 <div className="Header-content">
@@ -45,7 +43,7 @@ const Header = (props) => {
                 </div>
             </div>
         )    
-    
+    }
 }
 
 export default Header;

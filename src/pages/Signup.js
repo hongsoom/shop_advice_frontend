@@ -42,18 +42,18 @@ const Signup = () => {
                     
                     <label>아이디</label>
                     <div className="Singup_id">
-                        <input type="text" label="아이디" placeholder="아이디를 입력해주세요"  onChange={(e) => setuserId(e.target.value)}/>
+                        <input type="text" label="아이디" placeholder="3~10자이상(영문 대소문자,숫자 가능)" onChange={(e) => setuserId(e.target.value)}/>
                         <button onClick={idCheck}>중복확인</button>
                     </div>
 
                     <label>닉네임</label>
                     <div className="Singup_nickname">
-                        <input type="text" label="닉네임" placeholder="닉네임을 입력해주세요" onChange={(e) => setnickname(e.target.value)}/>
+                        <input type="text" label="닉네임" placeholder="3~10자이상(영문 대소문자,숫자 가능)" onChange={(e) => setnickname(e.target.value)}/>
                         <button onClick={nicknameCheck}>중복확인</button>
                     </div>
 
                     <label>비밀번호</label>
-                    <input type="Password" label="비밀번호" placeholder="최소8자이상(대문자,숫자,특수문자 각 1개씩 포함)" onChange={(e) => setpassword(e.target.value)}/>
+                    <input type="Password" label="비밀번호" placeholder="비밀번호를 입력해주세요." onChange={(e) => setpassword(e.target.value)}/>
 
                     <label>비밀번호 확인</label>
                     <input type="Password" label="비밀번호 확인" placeholder="비밀번호를 다시 입력해주세요." onChange={(e) => setpasswordCheck(e.target.value)} />

@@ -31,6 +31,7 @@
 .comment_add > button {
     width: 30%;
     height: 50px;
+    margin-left : 10px;
     text-align :center;
     font-weight: bold;
     background-color: #26BCF7;

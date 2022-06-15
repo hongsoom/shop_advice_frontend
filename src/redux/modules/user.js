@@ -129,7 +129,7 @@ export const idCheckFB = (userId) => {
           window.alert(message);
         })
         .catch((error) => {
-          console.error(error)
+          console.log(error)
           const error_message = error.response.data.errorMessage; 
           window.alert(error_message)
         })
@@ -148,7 +148,7 @@ export const idCheckFB = (userId) => {
           window.alert(message);
         })
         .catch((error) => {
-          console.error(error)
+          console.log(error)
           const error_message = error.response.data.errorMessage;
             window.alert(error_message)
         })

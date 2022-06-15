@@ -18,14 +18,8 @@ const Comment = ({articleId}) => {
 
     const addcomment = () => {
         dispatch(addCommentFB(
-            articleId, comment)); 
+            articleId, comment))
     }
-
-/*     const editcomment = () => {
-        dispatch(editCommentFB(
-            comment 
-        ))
-    } */
     
     return (
         <div className="comment_container">
