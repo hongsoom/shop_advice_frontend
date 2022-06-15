@@ -8,6 +8,9 @@ const LOAD = 'article/LOAD';
 const ADD = 'magazines/ADD';
 const MODIFY = 'magazines/MODIFY';
 const DELETE = 'article/DELETE';
+// 이미지 업로드
+const PREVIEW = 'image/PREVIEW';
+const UPLOAD = 'image/UPLOAD';
 
 // 초기 상태값
 const initialState = { 
@@ -34,6 +37,12 @@ export function modifyMagazine(magazine, magazine_index) {
 }
 export function deleteArticle(articles_id) {
     return { type: DELETE, articles_id };
+}
+export function previewImg(preview_img) {
+    return { type: PREVIEW, preview_img };
+}
+export function uploadImg(upload_img) {
+    return { type: UPLOAD, upload_img };
 }
 
 // axios
@@ -113,6 +122,11 @@ export default function reducer(state = initialState, action = {}) {
             });
             return {magazine: new_articles_list};
         }
+
+        // case "image/UPLOAD": {
+            
+        //     return{};
+        // }
 default:
 return state;
 }
