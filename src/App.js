@@ -12,11 +12,11 @@ import Login from "./pages/Login";
 
 function App() {
 
-const dispatch = useDispatch();
+/* const dispatch = useDispatch();
 
   React.useEffect(() => {
       dispatch(logincheckFB());
-  }, []);
+  }, []); */
 
   return (
     <div className="App">

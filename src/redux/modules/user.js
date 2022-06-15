@@ -5,13 +5,14 @@ const LOGIN_CHECK = 'user/LOGIN_CHECK';
 const LOG_OUT = 'user/LOG_OUT';
 
 const initialState = {
-  userId : null,
-  nickname : null,
-  is_login : false,
+  token : "",
+  userId : "",
+  nickname : "",
+  is_login: false,
 };
 
-export const Login = (user) => {
-    return { type: LOG_IN, user};
+export const Login = (token) => {
+    return { type: LOG_IN, token};
 };
 
 export const Logincheck = (userId, nickname) => {
@@ -60,11 +61,32 @@ export const LoginFB = (userId, password) => {
       .then((response) => {
         console.log(response)
 
-        localStorage.setItem("token", response.data.token)
-        const token = localStorage.setItem("token");
-        console.log(token);
+        const token = response.data.token
+        localStorage.setItem("token", token);
+        console.log(token)
+
+        instance
+        .get("/api/user/me", {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        })
+        .then((response) => {
+          console.log(response);
+          
+          const userId = response.data.userInfo.userId
+          const nickname = response.data.userInfo.nickname
+
+          localStorage.setItem("userId", userId)
+          localStorage.setItem("nickname", nickname)
+
+          dispatch(Logincheck(userId,nickname));
+          })
+          .catch((error) => {
+            console.error(error)
+          })
 
         history.push("/");
+
+        dispatch(Login(token))
 
       }).catch((error) => {
         console.log(error)
@@ -74,24 +96,27 @@ export const LoginFB = (userId, password) => {
     }
   }
 
-export const logincheckFB = () => {
+/* export const logincheckFB = () => {
     return async function(dispatch) {
         const _logincheck = await instance
         .get("/api/user/me")
         .then((response) => {
           console.log(response);
+          
+          const userId = response.data.userInfo.userId
+          const nickname = response.data.userInfo.nickname
 
-           localStorage.setItem("userId", response.data.userInfo.userId)
-           localStorage.setItem("nickname", response.data.userInfo.nickname)
+          localStorage.setItem("userId", userId)
+          localStorage.setItem("nickname", nickname)
 
-           dispatch(Logincheck(response.data.userInfo.userId, response.data.userInfo.nickname));
+          dispatch(Logincheck(userId,nickname));
           })
           .catch((error) => {
             console.error(error)
           })
     }
   }
-
+ */
 export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {
@@ -132,23 +157,23 @@ export const idCheckFB = (userId) => {
 
 export const LogoutFB = () => {
     return function(dispatch) {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("token");
         dispatch(Logout())
     }
   }
   
   export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
-      case "user/LOG_IN":
-        return {is_login : true};
+      case 'user/LOG_IN':
+        return { token : action.token, is_login : true };
   
-      case "user/LOGIN_CHECK": 
+      case 'user/LOGIN_CHECK': 
         return { userId : action.userId, nickname: action.nickname }; 
 
-      case "user/LOG_OUT":
-        return {is_login : false};
+      case 'user/LOG_OUT':
+        localStorage.removeItem("userId");
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("token");
+        return { is_login : false };;
 
       default:
         return state;
