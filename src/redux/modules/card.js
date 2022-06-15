@@ -1,15 +1,13 @@
 import instance from "../../shared/Request";
 import { apis } from '../../shared/api';
 
-
 // 게시글 관련 CRUD
 
 // Actions
-// const LOAD = 'magazines/LOAD';
 const LOAD = 'article/LOAD';
 const ADD = 'magazines/ADD';
 const MODIFY = 'magazines/MODIFY';
-const DELETE = 'magazines/DELETE';
+const DELETE = 'article/DELETE';
 
 // 초기 상태값
 const initialState = { 
@@ -20,8 +18,6 @@ const initialState = {
         content: "",
         price: "",
         category: ""
-        // date : new Date().toLocaleString(),
-        // name : ""
     }],
 };
 
@@ -36,8 +32,8 @@ export function addMagazine(magazine) {
 export function modifyMagazine(magazine, magazine_index) {
     return { type: MODIFY, magazine, magazine_index };
 }
-export function deleteMagazine(magazine_index) {
-    return { type: DELETE, magazine_index };
+export function deleteArticle(articles_id) {
+    return { type: DELETE, articles_id };
 }
 
 // axios
@@ -50,6 +46,17 @@ export const loadMagazineFB  = () => {
     }).catch((err) => {console.error(err)})
 	};}
     // dispatch(imageCreators.setPreview(null));
+
+export const delArticleFB = (articleId) => {
+    return async (dispatch, getState, { history }) => {
+        const del_article = await instance
+        .delete("/api/article/")
+        .then( (res) => {console.log(res);
+            const message = res.data.message;
+            window.alert(message);
+        }).catch((err) => {console.error(err)})
+};
+}
 
 export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
     console.log(title, imageUrl, shopUrl, content, price, category)
@@ -84,7 +91,7 @@ export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case "article/LOAD":
-            // return state;
+            // return state; //리덕스 단순동작 확인
             return {magazine : action.articles};
                 
         case "magazines/ADD": {
@@ -99,12 +106,12 @@ export default function reducer(state = initialState, action = {}) {
         //     return { ...state, magazine: new_magazine_list };
         // }
 
-        // case "magazines/DELETE": {
-        //     const new_magazine_list = state.magazine.filter((l, idx) => {
-        //     return parseInt(action.magazine_index) !== idx;
-        //     });
-        //     return {magazine: new_magazine_list};
-        // }
+        case "article/DELETE": {
+            const new_articles_list = state.magazine.filter((l, idx) => {
+            return parseInt(action.articles_id) !== idx;
+            });
+            return {magazine: new_articles_list};
+        }
 default:
 return state;
 }

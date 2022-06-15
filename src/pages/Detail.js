@@ -1,13 +1,20 @@
 import React from "react";
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import Comment from "../components/comment";
-import test from "../assets/test.png";
+// import test from "../assets/test.png";
 import profile from "../assets/profile.png";
 import "../css/Detail.css";
 
-const Detail = (props) => {
+const Detail = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-    const articleId = useParams().id;
+    const data = useSelector((state) => state.card.magazine);
+    // const name = useSelector((state) => state.user.nickname);
+
+    const articleId = useParams().articleId;
+    const index  = useParams().index;
 
     return (
         <div className="Detail_container">
@@ -15,23 +22,24 @@ const Detail = (props) => {
                 <div className="Detail_image">
                     <div className="Detail_user">
                         <img src={profile} alt='profile'/>
-                        <p>sumin</p>
+                        <p>{data[index].nickname}</p>
                     </div>    
                     <div className="Detail_poto">    
-                        <img src={test} alt='test'/>
-                        <p>2022.06.11 04:42</p>
+                        <img src={data[index].imageUrl} alt='post_image'/>
+                        <p>{data[index].createdAt}</p>
+                        {/* 시간 고민 필요  */}
                     </div>
                 </div>
                 <div className="Detail_infor">
                     <div className="Detail_title">
-                        <h1>YACHT CLUB HAT</h1>
-                        <p>카테고리</p>
+                        <h1>{data[index].title}</h1>
+                        <p>{data[index].category}</p>
                     </div>
-                    <p className="price">$25.00</p>
-                    <button>There's a link here!</button>
-                    <p className="content">Set sail with the most exclusive internet yacht club! The clubhouse offices are open from 6 am -9 pm with the exception of Monday - Sunday.  Only club members are allowed to use the pool noodles and motorboating is strongly encouraged. For more detailed information please try back later.</p>
+                    <p className="price">{data[index].price}</p>
+                    <button>{data[index].shopUrl}</button>
+                    <p className="content">{data[index].content}</p>
                 </div>
-            </div> 
+            </div>            
             <Comment articleId={articleId}/>
         </div>
     )

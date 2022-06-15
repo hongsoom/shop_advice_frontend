@@ -89,7 +89,7 @@ const Add = () => {
                     style={{display: 'none'}}
                     onChange={uploadFB}></input> */}
                     {/* <input type="submit" id="submit" value="이미지첨부"></input>  */}
-                    <button onClick={onClickuploadFB}>이미지첨부</button>                  
+                    {/* <button onClick={onClickuploadFB} >이미지첨부</button>                   */}
             </div>
             {/* 미리보기 */}
             <div className="Add_container">
@@ -124,7 +124,9 @@ const Add = () => {
             </div>
             <div className="Add_container">
                 <div className='Add_write'>
-                    <button onClick={add}>작성하기</button>
+                    <button type = "button" onClick={add}
+                    disabled={content === "" || title === "" || imageUrl === "" ? true : false }>
+                    작성하기</button>
                 </div>
             </div>
         </div>        
