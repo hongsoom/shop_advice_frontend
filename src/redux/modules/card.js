@@ -40,23 +40,21 @@ export function deleteArticle(articles_id) {
 export const loadMagazineFB  = () => {
     return async(dispatch, getState) => {
     await apis.articles()
-    .then((res) => {
+    .then((response) => {
         // console.log(res.data.articles);
-        dispatch(loadAarticles(res.data.articles));        
-    }).catch((err) => {console.error(err)})
+        dispatch(loadAarticles(response.data.articles));        
+    }).catch((error) => {console.error(error)})
 	};}
     // dispatch(imageCreators.setPreview(null));
 
 export const delArticleFB = (articleId) => {
     return async (dispatch, getState, { history }) => {
-        const del_article = await instance
-        .delete("/api/article/")
-        .then( (res) => {console.log(res);
-            const message = res.data.message;
+        await apis.del()
+        .then((response) => {console.log(response);
+            const message = response.data.message;
             window.alert(message);
-        }).catch((err) => {console.error(err)})
-};
-}
+        }).catch((error) => {console.error(error)})
+};}
 
 export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
     console.log(title, imageUrl, shopUrl, content, price, category)

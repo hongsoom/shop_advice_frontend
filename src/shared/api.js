@@ -8,10 +8,10 @@ const api = axios.create({
 
 export const apis = {
 	// article
-	add: (contents) => api.post('/api/articles', contents),
-	edit: (id, contents) => api.put(`api/articles/${id}`, contents),
-	del: (id) => api.delete(`/api/article/${id}`),
+	// add: (contents) => api.post('/api/articles', contents),
+	// edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+	del: (articleId) => api.delete(`/api/article/${articleId}`),
 	articles: () => api.get('/api/article'),
-	article: (id) => api.get(`/api/articles/${id}`),
-	search: (value) => api.get(`/api/articles/search?query=${value}`),
+	// article: (id) => api.get(`/api/articles/${id}`),
+	// search: (value) => api.get(`/api/articles/search?query=${value}`),
 };
