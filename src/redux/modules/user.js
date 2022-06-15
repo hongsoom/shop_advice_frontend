@@ -19,8 +19,8 @@ export const Logincheck = (userId, nickname) => {
     return { type: LOGIN_CHECK, userId, nickname };
 };
 
-export const Logout = (user) => {
-    return { type: LOG_OUT, user };
+export const Logout = () => {
+    return { type: LOG_OUT };
 };
 
 // middlewares
