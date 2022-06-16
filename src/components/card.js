@@ -14,24 +14,25 @@ React.useEffect(() => {
 
 const data = useSelector((state) => state.card.magazine);
 
-    return ( 
-        <div className="Card_container">
-            {data && data.map((list, index) => {
+    return (
+        data.map((list, index) => { 
+        // <div className='Card_container'>
                 return(
-                <div className='Card_box' key={index}>
-                    <div className='Card_one'>                    
-                    <div className='nickvar'>
-                            <p> 🙂 닉네임 : {list.nickname} </p>
-                        </div>
+                <div className='Card_one' key={index}>
+                    {/* <div className='Card_one' key={index}>                     */}
+                    <div className='listtitle'>
+                        <p>{list.title}</p>
+                    </div>
+                    <div className='Card_box'>
                     <img src={list.imageUrl} alt="post_image"
                     onClick={() => history.push("/Detail/" + index + "/" + `${list.articleId}`)}
                     />
-                    <p>{list.title}</p>
+                    <p> 🙂 닉네임 : {list.nickname} </p>
                     </div>
                 </div>
-                );
-            })}
-        </div>
+                );            
+        // </div>
+    })
     );
 };
 export default Card;

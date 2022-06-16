@@ -1,6 +1,6 @@
 import instance from "../../shared/Request";
 import { apis } from '../../shared/api';
-import axios from 'axios';
+// import axios from 'axios';
 // 게시글 관련 CRUD
 
 // Actions
@@ -58,23 +58,6 @@ export const delArticleFB = (articleId) => {
             history.push('/');
         }).catch((error) => {console.error(error)})
 };}
-
-export const uploadimageFB = (formDat) => {
-    return async (dispatch, getState, { history }) => {
-        await axios
-        .post("/api/image", formDat, 
-            {headers: { 'Content-Type': 'multipart/form-data' }})
-        .then((res) => {
-        const imageUrl = res.data.imageUrl;
-        console.log(imageUrl);        
-        alert("The file is successfully uploaded");
-        })
-        .catch((err) => {
-        console.log(err);
-        });
-        };
-}
-
 
 export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
     console.log(title, imageUrl, shopUrl, content, price, category)

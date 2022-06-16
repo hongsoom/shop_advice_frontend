@@ -4,14 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
 import { addMagazineFB } from "../redux/modules/card";
-import instance from "../shared/Request";
-// import { uploadimageFB } from "../redux/modules/image";
+// import instance from "../shared/Request";
+import { uploadimageFB } from "../redux/modules/image";
 
 const Add = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // const [imageName, setimageName ] = useState("");
     const [content, setContent] = useState("");
     const [shopUrl, setShopUrl] = useState("");
     const [title, setTitle] = useState("");
@@ -19,30 +18,23 @@ const Add = () => {
     const [category, setCategory] = useState("");
     // 미리보기
     const [preview, setPreview] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
     
-    const fileInput = React.useRef(null);
-
+    // const fileInput = React.useRef(null);
+    const imageUrl = useSelector((state) => state.image.imageUrl);
     //서버 확인 중
     const uploadFB = async(e) => {
-        const reader = new FileReader();
+        // const reader = new FileReader();
         const upfile = e.target.files[0];
-        reader.readAsDataURL(upfile);  
-            
+        // setimageName(upfile.name); 
+        
         const formData = new FormData();
         formData.append("image", upfile);
-        await instance
-            .post ("/api/image",formData,
-            {headers: {'Content-Type': 'multipart/form-data'}})
-            .then ((response) => {
-                // console.log(response.data.imageUrl)
-                fileInput.current = {url : response.data.imageUrl}
-            })
-            .catch((err) => {
-            console.log(err);
-        });
+        await dispatch(uploadimageFB(formData));
+        
+        // reader.readAsDataURL(upfile);
+        // reader.onload = function(e) {
+        //     setPreview(e.target.result);}
     }
-    console.log(fileInput.current);
     // 추가하기 액션
     const add = () => {
         dispatch(addMagazineFB(
@@ -70,8 +62,8 @@ const Add = () => {
                     </select> 
             </div>
             <div className="Add_input">
-                    <input type="file" id="file-upload" 
-                    accept="image/jpg, image/jpeg, image/png" valule = {imageUrl}
+                    <input type="file" id="file" 
+                    accept="image/jpg, image/jpeg, image/png"
                     onChange={uploadFB} />                    
                     {/* <input type="submit" id="submit" value="이미지첨부"></input>  */}
                     {/* <button onClick={onClickuploadFB} >이미지첨부</button>                   */}
@@ -80,7 +72,7 @@ const Add = () => {
             <div className="Add_container">
                     {/* 이미지 첨부 */}
                 <div className="Pre_input">
-                    <img src={fileInput} alt=''/>
+                    <img src={imageUrl} alt=''/>
                 </div>                
                 <div className="Pre_input">
                     <textarea 

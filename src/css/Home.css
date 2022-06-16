@@ -1,7 +1,7 @@
 .Home-container {
     width : 100%;
     margin-top: 50px;
-    padding: 20px;
+    padding: 10px;
 }
 
 .Home-content {
@@ -35,4 +35,11 @@
     border: 1px solid #26BCF7;
     font-family: inherit;
     margin: 10px 10px auto;
+}
+.Card_container {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }

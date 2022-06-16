@@ -30,7 +30,9 @@ const Home = (props) => {
                         <option value="여성복">여성복</option>
                     </select>
                 </div>
+                <div className='Card_container'>
                 <Card />
+                </div>
             </div>     
         </div>
     );

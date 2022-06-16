@@ -1,24 +1,11 @@
 // 이미지 업로드
-import axios from 'axios';
 import instance from "../../shared/Request";
-// import { handleActions } from 'redux-actions';
-// import produce from 'immer';
 
-// const PREVIEW = 'image/PREVIEW';
 const UPLOAD = 'image/UPLOAD';
 
-// export function previewImg(preview_img) {
-//     return { type: PREVIEW, preview_img };
-// }
 export function uploadImg(imageUrl) {
     return { type: UPLOAD, imageUrl };
 }
-
-// const initialState = {
-// 	imageUrl: null,
-// 	preview: null,
-// };
-// const imageUpload = createAction(UPLOAD, (imageUrl) => ({ imageUrl }));
 
 const initialState = {
 	imageUrl: null,
@@ -43,26 +30,6 @@ export const uploadimageFB = (formData) => {
 }
 
 // reducer
-// export default handleActions(
-// 	{
-// 		[UPLOAD]: (state, action) =>
-// 			produce(state, (draft) => {
-// 				draft.imageUrl = action.payload.imageUrl;
-// 			}),
-// 		// [PREVIEW]: (state, action) =>
-// 		// 	produce(state, (draft) => {
-// 		// 		draft.preview = action.payload.preview;
-// 		// 	}),
-// 	},
-// 	initialState,
-// );
-
-// const imageCreators = {
-// 	// setPreview,
-// 	imageUpload,
-// };
-
-// export { imageCreators };
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case "image/UPLOAD":
