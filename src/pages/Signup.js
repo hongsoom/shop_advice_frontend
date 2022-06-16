@@ -42,13 +42,13 @@ const Signup = () => {
                     
                     <label>아이디</label>
                     <div className="Singup_id">
-                        <input type="text" label="아이디" placeholder="3~10자이상(영문 대소문자,숫자 가능)" onChange={(e) => setuserId(e.target.value)}/>
+                        <input type="text" label="아이디" placeholder="3~10자(영문 대소문자,숫자 가능)" onChange={(e) => setuserId(e.target.value)}/>
                         <button onClick={idCheck}>중복확인</button>
                     </div>
 
                     <label>닉네임</label>
                     <div className="Singup_nickname">
-                        <input type="text" label="닉네임" placeholder="3~10자이상(영문 대소문자,숫자 가능)" onChange={(e) => setnickname(e.target.value)}/>
+                        <input type="text" label="닉네임" placeholder="3~10자(영문 대소문자,숫자 가능)" onChange={(e) => setnickname(e.target.value)}/>
                         <button onClick={nicknameCheck}>중복확인</button>
                     </div>
 

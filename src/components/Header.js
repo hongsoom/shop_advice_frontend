@@ -11,13 +11,13 @@ const Header = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const is_login = useSelector((state) => state.user.is_login)
     const nickname = useSelector((state) => state.user.nickname)
-    console.log(is_login)
+    //const is_session = localStorage.getItem("token") ? true : false
+    const is_login = useSelector((state) => state.user.is_login)
 
-/*     React.useEffect (() => {
+    React.useEffect (() => {
         dispatch(logincheckFB());
-      }, [is_login]); */
+      }, [is_login]);
     
         return (
             <div className="Header-container">
@@ -25,12 +25,12 @@ const Header = (props) => {
                     <Link to="/"> 
                         <img src={Logo} alt="Logo" />
                     </Link>
-                    {is_login === true ? (
+                    { is_login ? (
                         <>
                         <p className="nickname_btn2">{nickname}님 환영합니다!</p>
                         <button className="Logout_btn2" onClick={ () => dispatch(LogoutFB()) }>로그아웃</button>
                         </>
-                    ) : (
+                        ) : (
                         <>
                         <button className="Login_btn2" onClick={ () => history.push('/Login')}>로그인</button>
                         <button className="Singup_btn2" onClick={ () => history.push('/Signup')}>회원가입</button>
@@ -39,19 +39,6 @@ const Header = (props) => {
                 </div>
             </div>
             )
-/*     } else {
-        return (
-            <div className="Header-container">
-                <div className="Header-content">
-                    <Link to="/"> 
-                        <img src={Logo} alt="Logo" />
-                    </Link>
-                        <button className="Login_btn2" onClick={ () => history.push('/Login')}>로그인</button>
-                        <button className="Singup_btn2" onClick={ () => history.push('/Signup')}>회원가입</button>
-                </div>
-            </div>
-        )    
-    } */
-}
+        }
 
 export default Header;

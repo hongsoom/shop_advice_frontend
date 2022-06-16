@@ -14,12 +14,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const is_login = useSelector((state) => state.user.is_login)
-
-  React.useEffect (() => {
-      dispatch(logincheckFB());
-    }, [is_login]);
-
   return (
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */} 

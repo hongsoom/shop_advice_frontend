@@ -2,6 +2,7 @@ import instance from "../../shared/Request";
 
 const LOG_IN = 'user/LOG_IN';
 const LOGIN_CHECK = 'user/LOGIN_CHECK';
+const CHECK = 'user/CHECK';
 const LOG_OUT = 'user/LOG_OUT';
 
 const initialState = {
@@ -17,6 +18,10 @@ export const Login = (token) => {
 
 export const Logincheck = (userId, nickname) => {
     return { type: LOGIN_CHECK, userId, nickname };
+};
+
+export const Check = () => {
+  return { type: CHECK };
 };
 
 export const Logout = () => {
@@ -96,9 +101,9 @@ export const LoginFB = (userId, password) => {
     }
   }
 
-export const logincheckFB = () => {
-    return async function(dispatch) {
-        const _logincheck = await instance
+/* export const logincheckFB = () => {
+    return function(dispatch) {
+        const _logincheck =  instance
         .get("/api/user/me")
         .then((response) => {
           console.log(response);
@@ -112,10 +117,11 @@ export const logincheckFB = () => {
           dispatch(Logincheck(userId,nickname));
           })
           .catch((error) => {
-            console.error(error)
+            console.log(error)
           })
     }
   }
+ */
 
 export const idCheckFB = (userId) => {
   console.log(userId)
@@ -159,9 +165,16 @@ export const idCheckFB = (userId) => {
     }
   }
 
+export const logincheckFB = () => {
+    return function(dispatch, getState, { history }) {
+      dispatch(Check());
+    }
+}
+
 export const LogoutFB = () => {
     return function(dispatch, getState, { history }) {
         dispatch(Logout());
+        window.location.reload();
     }
 }
 
@@ -172,15 +185,20 @@ export default function reducer(state = initialState, action = {}) {
       state.token = action.token;
       console.log(state.is_login)
       console.log(state.token)
-      console.log(state)
       return state;
   
     case 'user/LOGIN_CHECK':
       state.userId = action.userId;
       state.nickname = action.nickname;
+      console.log(state.is_login)
       console.log(state.userId)
       console.log(state.nickname)
-      console.log(state)
+      return state; 
+
+    case 'user/CHECK':
+      console.log(state.is_login)
+      console.log(state.userId)
+      console.log(state.nickname)
       return state; 
 
     case 'user/LOG_OUT':
@@ -188,6 +206,7 @@ export default function reducer(state = initialState, action = {}) {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
       localStorage.removeItem("token");
+      console.log(state.is_login)
       return state;
 
     default:

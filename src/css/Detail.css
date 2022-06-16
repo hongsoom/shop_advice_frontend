@@ -57,6 +57,7 @@
     position : relative;
     left : 20px;
     top : 100px;
+    height: 50%;
 }
 
 .content {
