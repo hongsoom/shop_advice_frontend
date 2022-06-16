@@ -90,8 +90,8 @@ export const LoginFB = (userId, password) => {
           .catch((error) => {
             console.error(error)
           }) 
-
-        history.push("/");
+          history.push("/");
+        window.location.reload();
 
       }).catch((error) => {
         console.log(error)
