@@ -9,7 +9,7 @@ const initialState = {
   comments : [],
   comment : "",
   commentId : null,
-  comment_change : false,
+  editcomment : "",
 };
 
 export const loadComment = (comment_list) => {
@@ -136,8 +136,8 @@ export default function reducer(state = initialState, action = {}) {
       case 'comment/EDIT_COMMENT': {
           const new_comment_list = state.comments.map((a, idx) => 
             parseInt(action.commentId) === a.commentId? { ...a, ...action.comment } : a);
-          state.comment_change = true;
-          return { ...state, comments: new_comment_list, comment_change : true };
+            const new_commnet = action.comment;
+          return { ...state, comments: new_comment_list, editcomment : new_commnet };
         } 
   
         case 'comment/DELETE_COMMENT': {

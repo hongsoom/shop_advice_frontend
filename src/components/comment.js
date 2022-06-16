@@ -15,7 +15,7 @@ const Comment = ({articleId}) => {
     const data = useSelector((state) => state.comment.comments);
     const one = useSelector((state) => state.comment.comment);
     const Id = useSelector((state) => state.comment.commentId);
-    const comment_change = useSelector((state) => state.comment.comment_change);
+    const edit_comment = useSelector((state) => state.comment.editcomment);
 
     React.useEffect (() => {
         dispatch(loadCommentFB(articleId));
@@ -27,7 +27,7 @@ const Comment = ({articleId}) => {
 
     React.useEffect (() => {
         dispatch(loadCommentFB(articleId));
-    }, [comment_change]);
+    }, [edit_comment]);
 
     const addcomment = () => {
         dispatch(addCommentFB(
