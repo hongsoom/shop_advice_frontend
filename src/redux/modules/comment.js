@@ -7,6 +7,7 @@ const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 
 const initialState = {
   comments : [],
+  comment_change : false
 };
 
 export const loadComment = (comment_list) => {
@@ -122,20 +123,36 @@ export const deleteCommentFB = (commentId) => {
 export default function reducer(state = initialState, action = {}) {
       switch (action.type) {
         case 'comment/LOAD_COMMENT':
+          state.comment_change = true;
           return { comments : action.comment_list };
     
         case 'comment/ADD_COMMENT': {
+          if( state.comment_change === true) {
+            state.comment_change = false;
+          } else {
+          state.comment_change = true;
+          }
           const new_comment_list = [...state.comments, action.comment];
             return { comments :  new_comment_list };
         }
   
       case 'comment/EDIT_COMMENT': {
+        if( state.comment_change === true) {
+          state.comment_change = false;
+        } else {
+        state.comment_change = true;
+        }
           const new_comment_list = state.comments.map((a, idx) => 
             parseInt(action.commentId) === a.commentId? { ...a, ...action.comment } : a);
           return { ...state, comments: new_comment_list };
         } 
   
         case 'comment/DELETE_COMMENT': {
+          if( state.comment_change === true) {
+            state.comment_change = false;
+          } else {
+          state.comment_change = true;
+          }
         const new_comment_list = state.comments.filter((l) => {
           return parseInt(action.commentId) !== l.commentId;
         });

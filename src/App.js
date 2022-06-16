@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logincheckFB } from "./redux/modules/user";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
@@ -13,9 +14,15 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const is_login = useSelector((state) => state.user.is_login)
+
+  React.useEffect (() => {
+      dispatch(logincheckFB());
+    }, [is_login]);
+
   return (
     <div className="App">
-      {/* 헤더 아이콘 추후 고민 */}      
+      {/* 헤더 아이콘 추후 고민 */} 
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />

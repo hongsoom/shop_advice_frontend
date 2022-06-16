@@ -84,7 +84,7 @@ export const LoginFB = (userId, password) => {
           })
           .catch((error) => {
             console.error(error)
-          })
+          }) 
 
         history.push("/");
 
@@ -96,7 +96,7 @@ export const LoginFB = (userId, password) => {
     }
   }
 
-/* export const logincheckFB = () => {
+export const logincheckFB = () => {
     return async function(dispatch) {
         const _logincheck = await instance
         .get("/api/user/me")
@@ -116,7 +116,7 @@ export const LoginFB = (userId, password) => {
           })
     }
   }
- */
+
 export const idCheckFB = (userId) => {
   console.log(userId)
     return async function () {
@@ -160,36 +160,37 @@ export const idCheckFB = (userId) => {
   }
 
 export const LogoutFB = () => {
-    return function(dispatch) {
-        dispatch(Logout())
+    return function(dispatch, getState, { history }) {
+        dispatch(Logout());
     }
-  }
+}
+
+export default function reducer(state = initialState, action = {}) {
+  switch (action.type) {
+    case 'user/LOG_IN':
+      state.is_login = true;
+      state.token = action.token;
+      console.log(state.is_login)
+      console.log(state.token)
+      console.log(state)
+      return state;
   
-  export default function reducer(state = initialState, action = {}) {
-    switch (action.type) {
-      case 'user/LOG_IN':
-        console.log(state.is_login)
-        console.log(state.token)
-        state.is_login = true;
-        state.token = action.token;
-        return state;
-  
-      case 'user/LOGIN_CHECK': 
+    case 'user/LOGIN_CHECK':
+      state.userId = action.userId;
+      state.nickname = action.nickname;
       console.log(state.userId)
       console.log(state.nickname)
-        state.userId = action.userId;
-        state.nickname = action.nickname;
-        return state; 
+      console.log(state)
+      return state; 
 
-      case 'user/LOG_OUT':
-        console.log(state.is_login)
-        state.is_login = false;
-        localStorage.removeItem("userId");
-        localStorage.removeItem("nickname");
-        localStorage.removeItem("token");
-        return state;
+    case 'user/LOG_OUT':
+      state.is_login = false;
+      localStorage.removeItem("userId");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("token");
+      return state;
 
-      default:
-        return state;
+    default:
+      return state;
     }
   }  

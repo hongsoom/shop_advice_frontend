@@ -12,12 +12,12 @@ const Comment = ({articleId}) => {
     const [edit, setEdit] = React.useState(false);
     const [editcomment, setEditcomment] = React.useState("");
 
-    const data = useSelector((state) => state.comment.comments)
-    const list = useSelector((state) => state.comment.comments)
+    const data = useSelector((state) => state.comment.comments);
+    const comment_change = useSelector((state) => state.comment.comment_change);
 
     React.useEffect (() => {
         dispatch(loadCommentFB(articleId));
-      }, [comment]);
+      }, [comment_change]);
 
     const addcomment = () => {
         dispatch(addCommentFB(
@@ -58,27 +58,24 @@ const Comment = ({articleId}) => {
                         <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
                         <button onClick={addcomment}>작성하기</button>
                     </div> 
-                    {list.map((data, index) => {
+                    {data.map((list, index) => {
                         return (
                         <div className="comment">
                             <>
                             <div className="comment_profile">
                                 <img src={profile} alt='profile'/>
-                                <p>{data.nickname}</p>
+                                <p>{list.nickname}</p>
                             </div>
                             <div className="comment_edit">
                                 <input type="text" onChange={(e) => setEditcomment(e.target.value)}/>
-                                <button onClick={() => {dispatch(editCommentFB(data.commentId, editcomment)); setEdit(true);}}>수정하기</button>
+                                <button onClick={() => {dispatch(editCommentFB(list.commentId, editcomment)); setEdit(true);}}>수정하기</button>
                             </div>
                             </>
                     </div>
                     )})}
                 </div>
-                )
-                    
-        
-        
+            )
         }
-}
+    }
 
 export default Comment;

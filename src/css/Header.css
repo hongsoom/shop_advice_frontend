@@ -26,7 +26,7 @@
 }
 
 .nickname_btn2 {
-    margin: 23px 20px;
+    margin: 24px 10px;
     font-weight: 900;
     font-size: 18px;
 }
@@ -42,9 +42,10 @@
 .Logout_btn2 {
     margin: 0 100px 0 0;
 }
-
+/* 
 @media screen and (min-width : 350px) and (max-width : 850px) {
     .Singup_btn2 {
         margin: 0 50px 0 0;
     }
 }
+ */

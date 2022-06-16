@@ -115,7 +115,7 @@
     cursor : pointer;
 }
 
-@media screen and (min-width : 350px) and (max-width : 850px) {
+/* @media screen and (min-width : 350px) and (max-width : 850px) {
     .comment_profile > img {
         width: 50px;
         height: 50px;
@@ -129,4 +129,4 @@
     .comment_user > span {
         font-size: 20px;
     }
-}
+} */
