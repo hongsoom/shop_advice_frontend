@@ -17,8 +17,8 @@ export const addComment = (comment) => {
     return { type: ADD_COMMENT, comment};
 };
 
-export const editComment = (commentId) => {
-    return { type: EDIT_COMMENT, commentId };
+export const editComment = (commentId, comment) => {
+    return { type: EDIT_COMMENT, commentId, comment};
 };
 
 export const deleteComment  = (commentId) => {
@@ -72,11 +72,13 @@ export const loadCommentFB = (articleId) => {
     }
   }
   
-/* export const editCommentFB = (commentId) => {
+export const editCommentFB = (commentId, comment) => {
     return async function(dispatch,getState) {
       const _editcomment = await instance
       .put(`/api/comment/${commentId}`, {
-
+        comment : comment
+      }, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then((response) => {
         console.log(response)
@@ -84,7 +86,7 @@ export const loadCommentFB = (articleId) => {
         const message = response.data.message
         window.alert(message);
 
-        dispatch(editComment())
+        dispatch(editComment(commentId, comment))
       })
       .catch((error) => {
         console.log(error)
@@ -92,7 +94,7 @@ export const loadCommentFB = (articleId) => {
         window.alert(err_message)
     })
   }
-} */
+} 
   
 export const deleteCommentFB = (commentId) => {
     return async function(dispatch, getState) {
@@ -127,11 +129,11 @@ export default function reducer(state = initialState, action = {}) {
             return { comments :  new_comment_list };
         }
   
-/*      case "comment/EDIT_COMMENT": {
+      case 'comment/EDIT_COMMENT': {
           const new_comment_list = state.comments.map((a, idx) => 
-            parseInt(action.comment_index) === idx ? { ...a, ...action.comment } : a);
-          return { ...state, comment: new_comment_list };
-        } */
+            parseInt(action.commentId) === a.commentId? { ...a, ...action.comment } : a);
+          return { ...state, comments: new_comment_list };
+        } 
   
         case 'comment/DELETE_COMMENT': {
         const new_comment_list = state.comments.filter((l) => {

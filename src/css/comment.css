@@ -1,5 +1,5 @@
 .comment_container {
-    max-width : 100%;
+    width : 100%;
     margin-top: 30px;
 }
 
@@ -88,6 +88,31 @@
     cursor: pointer;
     margin-right: 10px;
     font-size: 30px;
+}
+
+.comment_edit {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.comment_edit > input {
+    margin : 30px;
+    width: 70%;
+    height: 50%;
+    border: 2px solid #26BCF7;
+}
+
+.comment_edit > button {
+    width: 30%;
+    height: 50%;
+    margin : 30px;
+    text-align :center;
+    font-weight: bold;
+    background-color: #26BCF7;
+    border: 2px solid #26BCF7;
+    box-shadow: 1px 1px 20px #ddd;
+    cursor : pointer;
 }
 
 @media screen and (min-width : 350px) and (max-width : 850px) {
