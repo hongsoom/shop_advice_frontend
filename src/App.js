@@ -12,12 +12,12 @@ import Login from "./pages/Login";
 
 function App() {
 
-  const dispatch = useDispatch();
+  const nickname = localStorage.getItem("nickname")
 
   return (
     <div className="App">
       {/* 헤더 아이콘 추후 고민 */} 
-      <Header />
+      <Header nickname={nickname} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/Detail/:index/:articleId" component={Detail} />

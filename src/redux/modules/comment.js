@@ -76,6 +76,7 @@ export const loadCommentFB = (articleId) => {
   }
   
 export const editCommentFB = (commentId, comment) => {
+  console.log(comment)
     return async function(dispatch,getState) {
       const _editcomment = await instance
       .put(`/api/comment/${commentId}`, {
@@ -137,6 +138,7 @@ export default function reducer(state = initialState, action = {}) {
           const new_comment_list = state.comments.map((a, idx) => 
             parseInt(action.commentId) === a.commentId? { ...a, ...action.comment } : a);
             const new_commnet = action.comment;
+            console.log(new_commnet)
           return { ...state, comments: new_comment_list, editcomment : new_commnet };
         } 
   

@@ -16,6 +16,7 @@ const Comment = ({articleId}) => {
     const one = useSelector((state) => state.comment.comment);
     const Id = useSelector((state) => state.comment.commentId);
     const edit_comment = useSelector((state) => state.comment.editcomment);
+    console.log(edit_comment)
 
     React.useEffect (() => {
         dispatch(loadCommentFB(articleId));

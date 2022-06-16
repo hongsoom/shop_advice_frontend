@@ -11,8 +11,8 @@ const Header = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const nickname = useSelector((state) => state.user.nickname)
-    //const is_session = localStorage.getItem("token") ? true : false
+    const nickname = localStorage.getItem("nickname")
+    const is_session = localStorage.getItem("token") ? true : false
     const is_login = useSelector((state) => state.user.is_login)
 
     React.useEffect (() => {
@@ -25,7 +25,7 @@ const Header = (props) => {
                     <Link to="/"> 
                         <img src={Logo} alt="Logo" />
                     </Link>
-                    { is_login ? (
+                    { is_login === true ||  is_session === true ? (
                         <>
                         <p className="nickname_btn2">{nickname}님 환영합니다!</p>
                         <button className="Logout_btn2" onClick={ () => dispatch(LogoutFB()) }>로그아웃</button>
