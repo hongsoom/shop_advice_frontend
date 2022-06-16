@@ -1,6 +1,6 @@
 import instance from "../../shared/Request";
 import { apis } from '../../shared/api';
-
+import axios from 'axios';
 // 게시글 관련 CRUD
 
 // Actions
@@ -8,9 +8,7 @@ const LOAD = 'article/LOAD';
 const ADD = 'magazines/ADD';
 const MODIFY = 'magazines/MODIFY';
 const DELETE = 'article/DELETE';
-// 이미지 업로드
-const PREVIEW = 'image/PREVIEW';
-const UPLOAD = 'image/UPLOAD';
+
 
 // 초기 상태값
 const initialState = { 
@@ -38,12 +36,6 @@ export function modifyMagazine(magazine, magazine_index) {
 export function deleteArticle(articles_id) {
     return { type: DELETE, articles_id };
 }
-export function previewImg(preview_img) {
-    return { type: PREVIEW, preview_img };
-}
-export function uploadImg(upload_img) {
-    return { type: UPLOAD, upload_img };
-}
 
 // axios
 export const loadMagazineFB  = () => {
@@ -66,6 +58,23 @@ export const delArticleFB = (articleId) => {
             history.push('/');
         }).catch((error) => {console.error(error)})
 };}
+
+export const uploadimageFB = (formDat) => {
+    return async (dispatch, getState, { history }) => {
+        await axios
+        .post("/api/image", formDat, 
+            {headers: { 'Content-Type': 'multipart/form-data' }})
+        .then((res) => {
+        const imageUrl = res.data.imageUrl;
+        console.log(imageUrl);        
+        alert("The file is successfully uploaded");
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+        };
+}
+
 
 export const addMagazineFB = (title, imageUrl, shopUrl, content, price, category) => {
     console.log(title, imageUrl, shopUrl, content, price, category)
@@ -109,7 +118,6 @@ export default function reducer(state = initialState, action = {}) {
             return { magazine: new_magazine_list };
             // return state;
         }
-
         // case "magazines/MODIFY": {
         //     const new_magazine_list = state.magazine.map((a, idx) => 
         //         parseInt(action.magazine_index) === idx ? { ...a, ...action.magazine } : a);

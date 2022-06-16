@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import card from "./modules/card";
 import user from "./modules/user";
 import comment from "./modules/comment";
+import image from "./modules/image";
 
 export const history = createBrowserHistory()
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     card : card,
     user : user,
     comment : comment,
+    image : image,
     router: connectRouter(history),
 });
 

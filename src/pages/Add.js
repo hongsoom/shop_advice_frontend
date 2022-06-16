@@ -1,10 +1,11 @@
 import React from 'react';
 import "../css/Add.css";
 import { useHistory } from 'react-router-dom';
-import { useRef, useState }from 'react';
+import { useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
 import { addMagazineFB } from "../redux/modules/card";
-import axios from 'axios';
+import instance from "../shared/Request";
+// import { uploadimageFB } from "../redux/modules/image";
 
 const Add = () => {
     const history = useHistory();
@@ -17,35 +18,31 @@ const Add = () => {
     const [price, setPrice] = useState("");    
     const [category, setCategory] = useState("");
     // 미리보기
-    // const [preview, setPreview ] = useState("");
-    const [imageUrl, setImageUrl ] = useState("");
-    // const [uploadedImg, setUploadedImg] = useState({
-    //     fillPath: ""
-    // });
+    const [preview, setPreview] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    
+    const fileInput = React.useRef(null);
 
     //서버 확인 중
-    const uploadFB = (e) => {
-        setImageUrl(e.target.files[0]);
-    };
-    const onSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", imageUrl);
-    console.log(formData)
-    const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-    axios
-        .post("/api/image", formData, config)
-        .then((res) => {
-        const imageUrl = res.data.imageUrl;
-        console.log(imageUrl);
-        
-        alert("The file is successfully uploaded");
-        })
-        .catch((err) => {
-        console.error(err);
+    const uploadFB = async(e) => {
+        const reader = new FileReader();
+        const upfile = e.target.files[0];
+        reader.readAsDataURL(upfile);  
+            
+        const formData = new FormData();
+        formData.append("image", upfile);
+        await instance
+            .post ("/api/image",formData,
+            {headers: {'Content-Type': 'multipart/form-data'}})
+            .then ((response) => {
+                // console.log(response.data.imageUrl)
+                fileInput.current = {url : response.data.imageUrl}
+            })
+            .catch((err) => {
+            console.log(err);
         });
-    };
-
+    }
+    console.log(fileInput.current);
     // 추가하기 액션
     const add = () => {
         dispatch(addMagazineFB(
@@ -56,13 +53,11 @@ const Add = () => {
         price,
         category
     ))
-    // console.log(imageUrl);
     history.push('/');
     }
     return (
         <div className="Add">
             <div className="add_title" >게시글 작성</div>
-        <form onSubmit={onSubmit}>
             <div className="Title_input">
                     <input type="text" placeholder="제목을 입력해주세요" 
                     onChange={(e) => { setTitle(e.target.value);}}/>
@@ -76,8 +71,8 @@ const Add = () => {
             </div>
             <div className="Add_input">
                     <input type="file" id="file-upload" 
-                    accept="image/jpg, image/jpeg, image/png" 
-                    defaltvalue="imageName" onChange={uploadFB} />                    
+                    accept="image/jpg, image/jpeg, image/png" valule = {imageUrl}
+                    onChange={uploadFB} />                    
                     {/* <input type="submit" id="submit" value="이미지첨부"></input>  */}
                     {/* <button onClick={onClickuploadFB} >이미지첨부</button>                   */}
             </div>
@@ -85,7 +80,7 @@ const Add = () => {
             <div className="Add_container">
                     {/* 이미지 첨부 */}
                 <div className="Pre_input">
-                    <img src={imageUrl} alt=''/>
+                    <img src={fileInput} alt=''/>
                 </div>                
                 <div className="Pre_input">
                     <textarea 
@@ -114,12 +109,12 @@ const Add = () => {
             </div>
             <div className="Add_container">
                 <div className='Add_write'>
-                    <button type = "button" onClick={add}
-                    disabled={content === "" || title === "" || imageUrl === "" ? true : false }>
+                    <button type="button"
+                    onClick={add}>
+                    {/* // disabled={content === "" || title === "" || imageUrl === "" ? true : false }> */}
                     작성하기</button>
                 </div>
             </div>
-        </form>
         </div>        
     );
 };
