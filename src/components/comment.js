@@ -9,46 +9,76 @@ const Comment = ({articleId}) => {
     const dispatch = useDispatch();
 
     const [comment, setComment] = React.useState("");
+    const [edit, setEdit] = React.useState(false);
+    const [editcomment, setEditcomment] = React.useState("");
 
     const data = useSelector((state) => state.comment.comments)
+    const list = useSelector((state) => state.comment.comments)
 
     React.useEffect (() => {
         dispatch(loadCommentFB(articleId));
-      }, [data]);
+      }, [comment]);
 
     const addcomment = () => {
         dispatch(addCommentFB(
             articleId, comment))
     }
     
-    return (
-        <div className="comment_container">
-            <div className="comment_add">
-                <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
-                <button onClick={addcomment}>작성하기</button>
+    if(edit === false) {
+        return (
+            <div className="comment_container">
+                <div className="comment_add">
+                    <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
+                    <button onClick={addcomment}>작성하기</button>
+                </div> 
+                {data.map((list, index) => {
+                    return (
+                    <div className="comment">
+                        <>
+                        <div className="comment_profile">
+                            <img src={profile} alt='profile'/>
+                            <p>{list.nickname}</p>
+                        </div>
+                        <div className="comment_list">
+                            <p>{list.comment}</p>
+                        </div>
+                        <div className="comment_user">
+                            <span onClick={() => setEdit(true)} className="material-symbols-outlined">edit</span>
+                            <span onClick={() => dispatch(deleteCommentFB(list.commentId))} className="material-symbols-outlined">delete</span>
+                        </div>
+                        </>
+                </div>
+                )})}
             </div>
-            <>
-            {data.map((list, index) => {
-                return (
-                <div className="comment">
-                    <>
-                    <div className="comment_profile">
-                        <img src={profile} alt='profile'/>
-                        <p>{list.nickname}</p>
+            )
+        } else {
+            return (
+                <div className="comment_container">
+                    <div className="comment_add">
+                        <input type="text" placeholder="댓글을 작성해 주세요" onChange={(e) => setComment(e.target.value)}></input>
+                        <button onClick={addcomment}>작성하기</button>
+                    </div> 
+                    {list.map((data, index) => {
+                        return (
+                        <div className="comment">
+                            <>
+                            <div className="comment_profile">
+                                <img src={profile} alt='profile'/>
+                                <p>{data.nickname}</p>
+                            </div>
+                            <div className="comment_edit">
+                                <input type="text" onChange={(e) => setEditcomment(e.target.value)}/>
+                                <button onClick={() => {dispatch(editCommentFB(data.commentId, editcomment)); setEdit(true);}}>수정하기</button>
+                            </div>
+                            </>
                     </div>
-                    <div className="comment_list">
-                        <p>{list.comment}</p>
-                    </div>
-                    <div className="comment_user">
-                        <span className="material-symbols-outlined">edit</span>
-                        <span onClick={() => dispatch(deleteCommentFB(list.commentId))} className="material-symbols-outlined">delete</span>
-                    </div>
-                    </>
-            </div>
-               )})}
-            </>
-        </div>
-    )
+                    )})}
+                </div>
+                )
+                    
+        
+        
+        }
 }
 
 export default Comment;

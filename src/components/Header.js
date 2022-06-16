@@ -13,13 +13,15 @@ const Header = (props) => {
 
     const nickname = localStorage.getItem("nickname");
     const is_session = localStorage.getItem("token") ? true : false
-    const is_login = useSelector((state) => state.user.is_login);
+    const is_login = useSelector((state) => state.user.is_login)
+
+    console.log(is_login)
 
     const Logout = () => {
         dispatch(LogoutFB())
     }
 
-    if (is_login || is_session) {
+    if (is_session === true && is_login === true) {
     return (
         <div className="Header-container">
             <div className="Header-content">

@@ -8,7 +8,7 @@ const initialState = {
   token : "",
   userId : "",
   nickname : "",
-  is_login: false,
+  is_login : false,
 };
 
 export const Login = (token) => {
@@ -168,16 +168,26 @@ export const LogoutFB = () => {
   export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
       case 'user/LOG_IN':
-        return { token : action.token, is_login : true };
+        console.log(state.is_login)
+        console.log(state.token)
+        state.is_login = true;
+        state.token = action.token;
+        return state;
   
       case 'user/LOGIN_CHECK': 
-        return { userId : action.userId, nickname: action.nickname }; 
+      console.log(state.userId)
+      console.log(state.nickname)
+        state.userId = action.userId;
+        state.nickname = action.nickname;
+        return state; 
 
       case 'user/LOG_OUT':
+        console.log(state.is_login)
+        state.is_login = false;
         localStorage.removeItem("userId");
         localStorage.removeItem("nickname");
         localStorage.removeItem("token");
-        return { is_login : false };;
+        return state;
 
       default:
         return state;

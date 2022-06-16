@@ -9,8 +9,7 @@ const Home = (props) => {
 
     // 드롭다운 관련
     const [category, setCategory] = React.useState('');
-    const is_login = useSelector((state) => state.user.is_login);
-    console.log(is_login)
+    const is_session = localStorage.getItem("token") ? true : false
 
     const handleChange = (event) => {
         setCategory(event.target.value);
@@ -19,9 +18,9 @@ const Home = (props) => {
     return (        
         <div className="Home-container">
             <div className="Home-content">
-                {is_login === true ||  is_login === undefined? 
+                {is_session === true ? 
                     <button onClick={() => history.push('/Add')}>작성하러가기</button>
-                : console.log("로그인을 하세요!") }
+                : null }
                 <div className='select'>
                     {/* 드롭박스 */}
                     <select value={category}
