@@ -90,8 +90,8 @@ const Add = () => {
             <div className="Add_container">
                 <div className='Add_write'>
                     <button type="button"
-                    onClick={add}>
-                    {/* // disabled={content === "" || title === "" || imageUrl === "" ? true : false }> */}
+                    onClick={add}
+                    disabled={content === "" || title === "" || imageUrl === "" ? true : false }>
                     작성하기</button>
                 </div>
             </div>
