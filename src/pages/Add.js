@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { useState }from 'react';
 import { useDispatch, useSelector } from "react-redux"; 
 import { addMagazineFB } from "../redux/modules/card";
-// import instance from "../shared/Request";
 import { uploadimageFB } from "../redux/modules/image";
 
 const Add = () => {
@@ -16,24 +15,15 @@ const Add = () => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");    
     const [category, setCategory] = useState("");
-    // 미리보기
-    const [preview, setPreview] = useState("");
-    
-    // const fileInput = React.useRef(null);
+
     const imageUrl = useSelector((state) => state.image.imageUrl);
     //서버 확인 중
     const uploadFB = async(e) => {
-        // const reader = new FileReader();
         const upfile = e.target.files[0];
-        // setimageName(upfile.name); 
         
         const formData = new FormData();
         formData.append("image", upfile);
         await dispatch(uploadimageFB(formData));
-        
-        // reader.readAsDataURL(upfile);
-        // reader.onload = function(e) {
-        //     setPreview(e.target.result);}
     }
     // 추가하기 액션
     const add = () => {
@@ -64,9 +54,7 @@ const Add = () => {
             <div className="Add_input">
                     <input type="file" id="file" 
                     accept="image/jpg, image/jpeg, image/png"
-                    onChange={uploadFB} />                    
-                    {/* <input type="submit" id="submit" value="이미지첨부"></input>  */}
-                    {/* <button onClick={onClickuploadFB} >이미지첨부</button>                   */}
+                    onChange={uploadFB} />
             </div>
             {/* 미리보기 */}
             <div className="Add_container">

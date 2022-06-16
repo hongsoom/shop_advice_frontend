@@ -11,8 +11,6 @@ const Edit = () => {
     const articleId = useParams().articleId;
     const index  = useParams().index;
 
-
-
     return (
         <div className="Edit">
             <div className="add_title">게시글 수정</div>
